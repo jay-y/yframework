@@ -3,22 +3,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.yframework</groupId>
+        <artifactId>yframework</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
     <groupId>org.yframework</groupId>
     <artifactId>yframework-system</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://jay-y.github.io/</url>
     <inceptionYear>2017-2020</inceptionYear>
     <description>Jay-Y's framework for base system module</description>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.6.RELEASE</version>
-        <relativePath/>
-    </parent>
 
     <properties>
         <!-- environment -->
@@ -44,7 +42,6 @@
         <hazelcast-hibernate52.version>1.2</hazelcast-hibernate52.version>
         <hazelcast-wm.version>3.7</hazelcast-wm.version>
         <!-- commons -->
-        <commons-io.version>2.5</commons-io.version>
         <commons-lang3.version>3.5</commons-lang3.version>
         <!-- expand -->
         <springloaded.version>1.2.6.RELEASE</springloaded.version>
@@ -54,6 +51,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -66,11 +70,6 @@
 
     <dependencies>
         <!-- yframework -->
-        <dependency>
-            <groupId>org.yframework</groupId>
-            <artifactId>yframework-mybatis</artifactId>
-            <version>${yframework.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.yframework.mybatis</groupId>
             <artifactId>yframework-mybatis-starter</artifactId>
@@ -307,12 +306,10 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>${commons-codec.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -344,6 +341,22 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source.version}</source>
+                    <target>${maven.compiler.target.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <dependencies>
@@ -370,20 +383,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.0</version>
-                <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
             </plugin>
             <!-- 下面的plugin配置是给mybatis自动生成代码用的，可以直接在eclipse里面直接生成代码，
 			或者使用mybatis-generator工具的命令行也可以生成，具体使用方法请百度一下 -->
@@ -530,12 +529,11 @@
             </properties>
         </profile>
         <profile>
-            <!--
-                Profile for applying IDE-specific configuration.
-                At the moment it only configures MapStruct, which you need when working
-                with DTOs.
-            -->
             <id>IDE</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>${java.version}</jdk>
+            </activation>
             <dependencies>
                 <dependency>
                     <groupId>org.mapstruct</groupId>

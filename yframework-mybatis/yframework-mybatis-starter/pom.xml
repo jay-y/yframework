@@ -22,5 +22,10 @@
             <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
             <version>${mybatis-spring-boot.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.yframework.mybatis</groupId>
+            <artifactId>yframework-mybatis-auditing-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

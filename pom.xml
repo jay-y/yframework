@@ -31,12 +31,21 @@
         <maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
         <m2e.apt.activation.version>jdt_apt</m2e.apt.activation.version>
         <mapstruct.version>1.1.0.Final</mapstruct.version>
+
         <!-- frameworks -->
         <spring-boot.version>1.5.6.RELEASE</spring-boot.version>
         <!-- commons -->
-        <commons-io.version>2.5</commons-io.version>
-        <commons-lang3.version>3.5</commons-lang3.version>
+        <slf4j.version>1.7.25</slf4j.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
     <!-- 设定主仓库，按设定顺序进行查找。 -->
     <repositories>
@@ -98,25 +107,6 @@
 
     </pluginRepositories>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
@@ -148,7 +138,8 @@
             <properties>
                 <maven.compiler.source>${maven.compiler.source.version}</maven.compiler.source>
                 <maven.compiler.target>${maven.compiler.target.version}</maven.compiler.target>
-                <maven.compiler.compilerVersion>${maven.compiler.compilerVersion.version}</maven.compiler.compilerVersion>
+                <maven.compiler.compilerVersion>${maven.compiler.compilerVersion.version}
+                </maven.compiler.compilerVersion>
             </properties>
         </profile>
     </profiles>

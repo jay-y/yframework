@@ -13,8 +13,10 @@
     <artifactId>yframework-mybatis-auditing-entity</artifactId>
 
     <properties>
-        <swagger-annotations.version>1.5.12</swagger-annotations.version>
+        <spring.version>4.3.5.RELEASE</spring.version>
         <spring-data-commons.version>1.12.6.RELEASE</spring-data-commons.version>
+        <swagger-annotations.version>1.5.12</swagger-annotations.version>
+        <validation-api.version>1.1.0.Final</validation-api.version>
         <pagehelper.version>1.2.1</pagehelper.version>
     </properties>
 
@@ -22,7 +24,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${springframework.version}</version>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -30,20 +37,15 @@
             <version>${spring-data-commons.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>
-        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
+            <version>${validation-api.version}</version>
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>${swagger-annotations.version}</version>
         </dependency>
-        <!-- 分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
