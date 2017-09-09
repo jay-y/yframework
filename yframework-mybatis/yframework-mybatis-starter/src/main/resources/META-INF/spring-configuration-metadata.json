@@ -1,0 +1,12 @@
+{
+  "groups": [
+    {
+      "name": "yframework",
+      "type": "org.yframework.mybatis.autoconfigure.YMybatisProperties",
+      "sourceType": "org.yframework.mybatis.autoconfigure.YMybatisProperties"
+    }
+  ],
+  "properties": [
+  ],
+  "hints": []
+}

@@ -1,0 +1,2 @@
+${AnsiColor.BRIGHT_BLUE}:: 柏成科技 http://becypress.com ::
+:: Running Spring Boot ${spring-boot.version} ::
