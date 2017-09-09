@@ -1,3 +1,0 @@
-2017-09-10 02:22:20 jdbc[4]: exception
-org.h2.jdbc.JdbcSQLException: Table "DATABASECHANGELOGLOCK" not found; SQL statement:
-select count(*) from PUBLIC.DATABASECHANGELOGLOCK [42102-196]
