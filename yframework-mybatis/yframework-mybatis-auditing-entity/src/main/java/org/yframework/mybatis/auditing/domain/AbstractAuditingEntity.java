@@ -1,7 +1,5 @@
 package org.yframework.mybatis.auditing.domain;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,7 +29,6 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
 
-    @NotNull
     @Column(name = "activated")
     private boolean activated = true;
 

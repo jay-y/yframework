@@ -13,7 +13,6 @@
     <artifactId>yframework-mybatis-auditing-entity</artifactId>
 
     <properties>
-        <spring.version>4.3.5.RELEASE</spring.version>
         <spring-data-commons.version>1.12.6.RELEASE</spring-data-commons.version>
         <swagger-annotations.version>1.5.12</swagger-annotations.version>
         <validation-api.version>1.1.0.Final</validation-api.version>

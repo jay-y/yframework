@@ -4,12 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.yframework</groupId>
         <artifactId>yframework</artifactId>
+        <groupId>org.yframework</groupId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath/>
     </parent>
-    <groupId>org.yframework</groupId>
     <artifactId>yframework-system</artifactId>
     <packaging>war</packaging>
 
@@ -19,9 +17,6 @@
     <description>Jay-Y's framework for base system module</description>
 
     <properties>
-        <!-- environment -->
-        <java.version>1.8</java.version>
-        <mapstruct.version>1.1.0.Final</mapstruct.version>
         <!-- profile -->
         <profile.no-liquibase/>
         <profile.swagger/>
@@ -36,11 +31,6 @@
         <liquibase-slf4j.version>2.0.0</liquibase-slf4j.version>
         <!-- logback -->
         <logstash-logback-encoder.version>4.9</logstash-logback-encoder.version>
-        <!-- validation -->
-        <validation-api.version>1.1.0.Final</validation-api.version>
-        <!-- hazelcast -->
-        <hazelcast-hibernate52.version>1.2</hazelcast-hibernate52.version>
-        <hazelcast-wm.version>3.7</hazelcast-wm.version>
         <!-- commons -->
         <commons-lang3.version>3.5</commons-lang3.version>
         <!-- expand -->
@@ -247,24 +237,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.hazelcast</groupId>-->
-        <!--<artifactId>hazelcast</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.hazelcast</groupId>-->
-        <!--<artifactId>hazelcast-hibernate52</artifactId>-->
-        <!--<version>${hazelcast-hibernate52.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.hazelcast</groupId>-->
-        <!--<artifactId>hazelcast-spring</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.hazelcast</groupId>-->
-        <!--<artifactId>hazelcast-wm</artifactId>-->
-        <!--<version>${hazelcast-wm.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
@@ -317,24 +289,16 @@
             <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-servlet</artifactId>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-bean-validators</artifactId>
-            <version>${springfox.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.mapstruct</groupId>
-                    <artifactId>mapstruct</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
