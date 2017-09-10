@@ -62,7 +62,7 @@
         <!-- yframework -->
         <dependency>
             <groupId>org.yframework.mybatis</groupId>
-            <artifactId>yframework-mybatis-starter</artifactId>
+            <artifactId>yframework-mybatis-spring-boot-starter</artifactId>
             <version>${yframework.version}</version>
         </dependency>
         <!-- mapstruct -->

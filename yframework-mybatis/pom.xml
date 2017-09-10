@@ -10,7 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>yframework-mybatis-auditing-entity</module>
-        <module>yframework-mybatis-starter</module>
+        <module>yframework-mybatis-spring-boot-autoconfigure</module>
+        <module>yframework-mybatis-spring-boot-starter</module>
     </modules>
 
     <artifactId>yframework-mybatis</artifactId>

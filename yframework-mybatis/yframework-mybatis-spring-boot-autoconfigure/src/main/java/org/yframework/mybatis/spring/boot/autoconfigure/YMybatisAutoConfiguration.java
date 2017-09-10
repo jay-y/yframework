@@ -1,4 +1,4 @@
-package org.yframework.mybatis.starter;
+package org.yframework.mybatis.spring.boot.autoconfigure;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
