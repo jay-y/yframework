@@ -8,20 +8,28 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.*;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.SSLContext;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,19 +49,29 @@ public enum HttpUtil
     private final static int _TIMEOUT_SOCKET = 10000;
     private final static int _TIMEOUT_CONNECT = 10000;
     private final static int _TIMEOUT_CONNECTION_REQUEST = 10000;
+    private final static int _MAX_TOTAL = 50; //整个连接池最大连接数
+    private final static int _DEFAULT_MAX_PER_ROUTE = 25; //路由的默认最大连接
 
     private final Logger log = LoggerFactory.getLogger(HttpUtil.class);
-    private final RequestConfig requestConfig;
-    private final PoolingHttpClientConnectionManager connMgr;
-    public final HttpClientBuilder builder;
+    public final RequestConfig requestConfig;
+    public final PoolingHttpClientConnectionManager connMgr;
     private CloseableHttpClient httpClient;
     private CloseableHttpClient httpClientSSL;
 
     HttpUtil()
     {
-        this.requestConfig = RequestConfig.custom().setSocketTimeout(_TIMEOUT_SOCKET).setConnectTimeout(_TIMEOUT_CONNECT).setConnectionRequestTimeout(_TIMEOUT_CONNECTION_REQUEST).build();
-        this.connMgr = new PoolingHttpClientConnectionManager();
-        this.builder = HttpClients.custom().setConnectionManager(connMgr).setDefaultRequestConfig(requestConfig);
+        requestConfig = RequestConfig.custom().
+            setSocketTimeout(_TIMEOUT_SOCKET).
+            setConnectTimeout(_TIMEOUT_CONNECT).
+            setConnectionRequestTimeout(_TIMEOUT_CONNECTION_REQUEST).
+            build();
+        Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create().
+            register("https", this.createSSLConnSocketFactory()).
+            register("http", this.createConnSocketFactory()).
+            build();
+        connMgr = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
+        connMgr.setMaxTotal(_MAX_TOTAL);
+        connMgr.setDefaultMaxPerRoute(_DEFAULT_MAX_PER_ROUTE);
     }
 
     public CloseableHttpClient getHttpClient()
@@ -62,19 +80,25 @@ public enum HttpUtil
         {
             synchronized (INSTANCE)
             {
-                this.httpClient = this.builder.build();
+                this.httpClient = HttpClients.custom().
+                    setConnectionManager(connMgr).
+                    setDefaultRequestConfig(requestConfig).
+                    build();
             }
         }
         return this.httpClient;
     }
 
-    public CloseableHttpClient getHttpClientSSL()
+    public CloseableHttpClient getHttpClientSSL() throws Exception
     {
         if (null == httpClientSSL)
         {
             synchronized (INSTANCE)
             {
-                this.httpClientSSL = this.builder.setSSLSocketFactory(createSSLConnSocketFactory()).build();
+                this.httpClientSSL = HttpClients.custom().
+                    setConnectionManager(connMgr).
+                    setDefaultRequestConfig(requestConfig).
+                    build();
             }
         }
         return this.httpClientSSL;
@@ -193,18 +217,18 @@ public enum HttpUtil
      * @param json   json对象
      * @return
      */
-    public String doPost(String apiUrl, Object json) throws IOException
+    public String doPost(String apiUrl, Object json) throws Exception
     {
         HttpPost httpPost = new HttpPost(apiUrl);
         return doRequestWithJSON(httpPost, json.toString(), _UTF_8);
     }
 
-    public String doPostWhithXML(String apiUrl, String xmlinfo) throws IOException
+    public String doPostWhithXML(String apiUrl, String xmlinfo) throws Exception
     {
         return doPostWhithXML(apiUrl, xmlinfo, _UTF_8);
     }
 
-    public String doPostWhithXML(String apiUrl, String xmlinfo, String encoding) throws IOException
+    public String doPostWhithXML(String apiUrl, String xmlinfo, String encoding) throws Exception
     {
         HttpPost httpPost = new HttpPost(apiUrl);
         return doRequestWithXML(httpPost, xmlinfo, encoding);
@@ -217,7 +241,7 @@ public enum HttpUtil
      * @param json   json对象
      * @return
      */
-    public String doPut(String apiUrl, Object json) throws IOException
+    public String doPut(String apiUrl, Object json) throws Exception
     {
         HttpPut httpPut = new HttpPut(apiUrl);
         return doRequestWithJSON(httpPut, json.toString(), _UTF_8);
@@ -230,7 +254,7 @@ public enum HttpUtil
      * @param params 参数map
      * @return
      */
-    public String doPostSSL(String apiUrl, Map<String, Object> params) throws IOException
+    public String doPostSSL(String apiUrl, Map<String, Object> params) throws Exception
     {
         HttpPost httpPost = new HttpPost(apiUrl);
         List<NameValuePair> pairList = new ArrayList<NameValuePair>(params.size());
@@ -270,55 +294,44 @@ public enum HttpUtil
      * @param json   JSON对象
      * @return
      */
-    public String doPostSSL(String apiUrl, Object json) throws IOException
+    public String doPostSSL(String apiUrl, Object json) throws Exception
     {
         HttpPost httpPost = new HttpPost(apiUrl);
         return doRequestSSLWithJSON(httpPost, json.toString(), _UTF_8);
     }
 
-    public String doPostSSLWhithXML(String apiUrl, String xmlinfo) throws IOException
+    public String doPostSSLWhithXML(String apiUrl, String xmlinfo) throws Exception
     {
         return doPostSSLWhithXML(apiUrl, xmlinfo, _UTF_8);
     }
 
-    public String doPostSSLWhithXML(String apiUrl, String xmlinfo, String encoding) throws IOException
+    public String doPostSSLWhithXML(String apiUrl, String xmlinfo, String encoding) throws Exception
     {
         HttpPost httpPost = new HttpPost(apiUrl);
         return doRequestSSLWithXML(httpPost, xmlinfo, encoding);
     }
 
-    /**
-     * 创建SSL安全连接
-     *
-     * @return
-     */
-    private SSLConnectionSocketFactory createSSLConnSocketFactory()
-    {
-        SSLConnectionSocketFactory sslsf = SSLConnectionSocketFactory.getSocketFactory();
-        return sslsf;
-    }
-
-    private String doRequestWithJSON(HttpEntityEnclosingRequestBase request, String json, String encoding) throws IOException
+    private String doRequestWithJSON(HttpEntityEnclosingRequestBase request, String json, String encoding) throws Exception
     {
         return this.doRequest(request, json, encoding, _CONTENT_TYPE_JSON);
     }
 
-    private String doRequestWithXML(HttpEntityEnclosingRequestBase request, String message, String encoding) throws IOException
+    private String doRequestWithXML(HttpEntityEnclosingRequestBase request, String message, String encoding) throws Exception
     {
         return this.doRequest(request, message, encoding, _CONTENT_TYPE_XML);
     }
 
-    private String doRequestSSLWithJSON(HttpEntityEnclosingRequestBase request, String json, String encoding) throws IOException
+    private String doRequestSSLWithJSON(HttpEntityEnclosingRequestBase request, String json, String encoding) throws Exception
     {
         return this.doRequestSSL(request, json, encoding, _CONTENT_TYPE_JSON);
     }
 
-    private String doRequestSSLWithXML(HttpEntityEnclosingRequestBase request, String message, String encoding) throws IOException
+    private String doRequestSSLWithXML(HttpEntityEnclosingRequestBase request, String message, String encoding) throws Exception
     {
         return this.doRequestSSL(request, message, encoding, _CONTENT_TYPE_XML);
     }
 
-    private String doRequest(HttpEntityEnclosingRequestBase request, String message, String encoding, String contentType) throws IOException
+    private String doRequest(HttpEntityEnclosingRequestBase request, String message, String encoding, String contentType) throws Exception
     {
         StringEntity stringEntity = new StringEntity(message, encoding);
         stringEntity.setContentEncoding(encoding);
@@ -338,7 +351,7 @@ public enum HttpUtil
         return result;
     }
 
-    private String doRequestSSL(HttpEntityEnclosingRequestBase request, String message, String encoding, String contentType) throws IOException
+    private String doRequestSSL(HttpEntityEnclosingRequestBase request, String message, String encoding, String contentType) throws Exception
     {
         StringEntity stringEntity = new StringEntity(message, encoding);
         stringEntity.setContentEncoding(encoding);
@@ -356,5 +369,46 @@ public enum HttpUtil
             log.error(e.getMessage(), e);
         }
         return result;
+    }
+
+    private ConnectionSocketFactory createConnSocketFactory()
+    {
+        return PlainConnectionSocketFactory.getSocketFactory();
+    }
+
+    /**
+     * 创建SSL安全连接
+     *
+     * @return
+     */
+    private ConnectionSocketFactory createSSLConnSocketFactory()
+    {
+//        SSLConnectionSocketFactory sslsf = SSLConnectionSocketFactory.getSocketFactory();
+        SSLConnectionSocketFactory sslsf = null;
+        try
+        {
+            //信任所有证书
+            sslsf = new SSLConnectionSocketFactory(this.createIgnoreVerifySSL().getSocketFactory(), null, null, (x509Certificates, s) -> true);
+        }
+        catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        }
+        return sslsf;
+    }
+
+    /**
+     * 创建忽略验证的SSLContext
+     *
+     * @return
+     * @throws KeyStoreException
+     * @throws NoSuchAlgorithmException
+     * @throws KeyManagementException
+     */
+    public SSLContext createIgnoreVerifySSL() throws Exception
+    {
+        return new SSLContextBuilder().
+            loadTrustMaterial(null, (x509Certificates, s) -> true).
+            build();
     }
 }
