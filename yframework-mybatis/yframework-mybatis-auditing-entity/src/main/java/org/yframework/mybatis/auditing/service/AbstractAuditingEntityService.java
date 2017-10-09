@@ -36,9 +36,9 @@ public abstract class AbstractAuditingEntityService<DO extends AuditingEntity, D
 
     @Override
     @Caching(put = {
-            @CachePut(key = _CACHE_KEY_SP_ONE)
+        @CachePut(key = _CACHE_KEY_SP_ONE)
     }, evict = {
-            @CacheEvict(key = _CACHE_KEY_SP_ONE), @CacheEvict(key = _CACHE_KEY_SP_ALL), @CacheEvict(key = _CACHE_KEY_SP_COUNT_ALL)
+        @CacheEvict(key = _CACHE_KEY_SP_ALL), @CacheEvict(key = _CACHE_KEY_SP_COUNT_ALL), @CacheEvict(key = _CACHE_KEY_SP_ONE)
     })
     @Transactional
     public DTO save(DTO dto)
@@ -90,8 +90,8 @@ public abstract class AbstractAuditingEntityService<DO extends AuditingEntity, D
 //        return new PageImpl<>(getMapper().dosToDtos(es), pageable, count);
         DO e = getMapper().dtoToDo(dto);
         com.github.pagehelper.Page<DO> pageTmp = PageHelper.
-                startPage(pageable.getPageNumber(), pageable.getPageSize()).
-                doSelectPage(() -> getRepository().findPage(e, pageable));
+            startPage(pageable.getPageNumber(), pageable.getPageSize()).
+            doSelectPage(() -> getRepository().findPage(e, pageable));
         Page<DO> page = new PageImpl<>(pageTmp.getResult(), pageable, pageTmp.getTotal());
         return page.map(aDo -> getMapper().doToDto(aDo));
     }
@@ -112,7 +112,7 @@ public abstract class AbstractAuditingEntityService<DO extends AuditingEntity, D
 
     @Override
     @Caching(evict = {
-            @CacheEvict(key = _CACHE_KEY_SP_ONE), @CacheEvict(key = _CACHE_KEY_SP_ALL), @CacheEvict(key = _CACHE_KEY_SP_COUNT_ALL)
+        @CacheEvict(key = _CACHE_KEY_SP_ALL), @CacheEvict(key = _CACHE_KEY_SP_COUNT_ALL), @CacheEvict(key = _CACHE_KEY_SP_ONE)
     })
     @Transactional
     public void activate(DTO dto)
@@ -123,7 +123,7 @@ public abstract class AbstractAuditingEntityService<DO extends AuditingEntity, D
 
     @Override
     @Caching(evict = {
-            @CacheEvict(key = _CACHE_KEY_SP_ONE), @CacheEvict(key = _CACHE_KEY_SP_ALL), @CacheEvict(key = _CACHE_KEY_SP_COUNT_ALL)
+        @CacheEvict(key = _CACHE_KEY_SP_ALL), @CacheEvict(key = _CACHE_KEY_SP_COUNT_ALL), @CacheEvict(key = _CACHE_KEY_SP_ONE)
     })
     @Transactional
     public void freeze(DTO dto)
@@ -134,7 +134,7 @@ public abstract class AbstractAuditingEntityService<DO extends AuditingEntity, D
 
     @Override
     @Caching(evict = {
-            @CacheEvict(key = _CACHE_KEY_SP_ONE), @CacheEvict(key = _CACHE_KEY_SP_ALL), @CacheEvict(key = _CACHE_KEY_SP_COUNT_ALL)
+        @CacheEvict(key = _CACHE_KEY_SP_ALL), @CacheEvict(key = _CACHE_KEY_SP_COUNT_ALL), @CacheEvict(key = _CACHE_KEY_SP_ONE)
     })
     @Transactional
     public void delete(DTO dto)

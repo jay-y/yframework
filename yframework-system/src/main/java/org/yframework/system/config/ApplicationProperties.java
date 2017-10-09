@@ -24,7 +24,6 @@ public class ApplicationProperties
     private final Cache cache = new Cache();
     private final Mail mail = new Mail();
     private final Security security = new Security();
-    private final Swagger swagger = new Swagger();
     private final Metrics metrics = new Metrics();
     private final CorsConfiguration cors = new CorsConfiguration();
     private final Social social = new Social();
@@ -66,11 +65,6 @@ public class ApplicationProperties
     public Security getSecurity()
     {
         return this.security;
-    }
-
-    public Swagger getSwagger()
-    {
-        return this.swagger;
     }
 
     public Metrics getMetrics()
@@ -525,124 +519,6 @@ public class ApplicationProperties
             {
                 this.enabled = enabled;
             }
-        }
-    }
-
-    public class Swagger
-    {
-        private String title = "Application API";
-        private String description = "API documentation";
-        private String version = "0.0.1";
-        private String termsOfServiceUrl;
-        private String contactName;
-        private String contactUrl;
-        private String contactEmail;
-        private String license;
-        private String licenseUrl;
-        private String defaultIncludePattern = "/api/.*";
-
-        public Swagger()
-        {
-        }
-
-        public String getTitle()
-        {
-            return this.title;
-        }
-
-        public void setTitle(String title)
-        {
-            this.title = title;
-        }
-
-        public String getDescription()
-        {
-            return this.description;
-        }
-
-        public void setDescription(String description)
-        {
-            this.description = description;
-        }
-
-        public String getVersion()
-        {
-            return this.version;
-        }
-
-        public void setVersion(String version)
-        {
-            this.version = version;
-        }
-
-        public String getTermsOfServiceUrl()
-        {
-            return this.termsOfServiceUrl;
-        }
-
-        public void setTermsOfServiceUrl(String termsOfServiceUrl)
-        {
-            this.termsOfServiceUrl = termsOfServiceUrl;
-        }
-
-        public String getContactName()
-        {
-            return this.contactName;
-        }
-
-        public void setContactName(String contactName)
-        {
-            this.contactName = contactName;
-        }
-
-        public String getContactUrl()
-        {
-            return this.contactUrl;
-        }
-
-        public void setContactUrl(String contactUrl)
-        {
-            this.contactUrl = contactUrl;
-        }
-
-        public String getContactEmail()
-        {
-            return this.contactEmail;
-        }
-
-        public void setContactEmail(String contactEmail)
-        {
-            this.contactEmail = contactEmail;
-        }
-
-        public String getLicense()
-        {
-            return this.license;
-        }
-
-        public void setLicense(String license)
-        {
-            this.license = license;
-        }
-
-        public String getLicenseUrl()
-        {
-            return this.licenseUrl;
-        }
-
-        public void setLicenseUrl(String licenseUrl)
-        {
-            this.licenseUrl = licenseUrl;
-        }
-
-        public String getDefaultIncludePattern()
-        {
-            return this.defaultIncludePattern;
-        }
-
-        public void setDefaultIncludePattern(String defaultIncludePattern)
-        {
-            this.defaultIncludePattern = defaultIncludePattern;
         }
     }
 

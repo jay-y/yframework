@@ -27,5 +27,9 @@ public interface AuditingEntityResource<VO extends Object>
 
     ResponseEntity<Page<VO>> query(String query, Pageable pageable) throws Exception;
 
-    <ID extends Serializable> ResponseEntity<Void> delete(ID id) throws Exception;
+    <ID extends Serializable> ResponseEntity<ID> activate(ID id) throws Exception;
+
+    <ID extends Serializable> ResponseEntity<ID> freeze(ID id) throws Exception;
+
+    <ID extends Serializable> ResponseEntity<ID> delete(ID id) throws Exception;
 }

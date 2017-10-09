@@ -38,43 +38,6 @@ public abstract class AbstractAuditingEntityResource<VO extends AuditingEntityDT
         this.entityName = cls.getName();
     }
 
-    @PostMapping
-    @Override
-    public ResponseEntity<VO> create(@Valid @RequestBody VO vo) throws Exception
-    {
-        log.debug("REST request to save {} : {}", entityName, vo);
-        if (vo.getId() != null)
-        {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(entityName, "idexists", "A new vo cannot already have an ID")).body(null);
-        }
-        VO result = (VO) getService().save(vo);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert(entityName, result.getId().toString())).body(result);
-    }
-
-    @PutMapping
-    @Override
-    public ResponseEntity<VO> update(@Valid @RequestBody VO vo) throws Exception
-    {
-        log.debug("REST request to update {} : {}", entityName, vo);
-        if (vo.getId() == null)
-        {
-            return create(vo);
-        }
-        VO result = (VO) getService().save(vo);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(entityName, result.getId().toString())).body(result);
-    }
-
-    @DeleteMapping("/{id}")
-    @Override
-    public <ID extends Serializable> ResponseEntity<Void> delete(@PathVariable ID id) throws Exception
-    {
-        log.debug("REST request to delete {} : {}", entityName, id);
-        VO vo = this.cls.newInstance();
-        vo.setId(id);
-        getService().delete(vo);
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping
     @Override
     public List<VO> getAll()
@@ -101,5 +64,64 @@ public abstract class AbstractAuditingEntityResource<VO extends AuditingEntityDT
         Page<VO> page = getService().findAll(y.util().json().jsonToObject(query, cls), pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page);
         return ResponseEntity.ok().headers(headers).body(page);
+    }
+
+    @PostMapping
+    @Override
+    public ResponseEntity<VO> create(@Valid @RequestBody VO vo) throws Exception
+    {
+        log.debug("REST request to save {} : {}", entityName, vo);
+        if (vo.getId() != null)
+        {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(entityName, "idexists", "A new vo cannot already have an ID")).body(null);
+        }
+        VO result = (VO) getService().save(vo);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert(entityName, result.getId().toString())).body(result);
+    }
+
+    @PutMapping
+    @Override
+    public ResponseEntity<VO> update(@Valid @RequestBody VO vo) throws Exception
+    {
+        log.debug("REST request to update {} : {}", entityName, vo);
+        if (vo.getId() == null)
+        {
+            return create(vo);
+        }
+        VO result = (VO) getService().save(vo);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(entityName, result.getId().toString())).body(result);
+    }
+
+    @PutMapping("/activate/{id}")
+    @Override
+    public <ID extends Serializable> ResponseEntity<ID> activate(@PathVariable ID id) throws Exception
+    {
+        log.debug("REST request to activate {} : {}", entityName, id);
+        VO vo = this.cls.newInstance();
+        vo.setId(id);
+        getService().activate(vo);
+        return ResponseEntity.ok(id);
+    }
+
+    @PutMapping("/freeze/{id}")
+    @Override
+    public <ID extends Serializable> ResponseEntity<ID> freeze(@PathVariable ID id) throws Exception
+    {
+        log.debug("REST request to freeze {} : {}", entityName, id);
+        VO vo = this.cls.newInstance();
+        vo.setId(id);
+        getService().freeze(vo);
+        return ResponseEntity.ok(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @Override
+    public <ID extends Serializable> ResponseEntity<ID> delete(@PathVariable ID id) throws Exception
+    {
+        log.debug("REST request to delete {} : {}", entityName, id);
+        VO vo = this.cls.newInstance();
+        vo.setId(id);
+        getService().delete(vo);
+        return ResponseEntity.ok(id);
     }
 }

@@ -139,14 +139,15 @@ application:
         spectator-metrics: # Reports Spectator Circuit Breaker metrics in the logs
             enabled: false
             # edit spring.metrics.export.delay-millis to set report frequency
-    swagger:
-        default-include-pattern: /api/.*
-        title: RESTful APIs
-        description: API documentation
-        version: 0.0.1
-        terms-of-service-url:
-        contact-name: Jay-Y
-        contact-url: https://jay-y.github.io
-        contact-email: jay_y@foxmail.com
-        license:
-        license-url:
+
+application-swagger:
+    default-include-pattern: /api/.*
+    title: RESTful APIs
+    description: API documentation
+    version: 0.0.1
+    terms-of-service-url:
+    contact-name: Jay-Y
+    contact-url: https://jay-y.github.io
+    contact-email: jay_y@foxmail.com
+    license:
+    license-url:
