@@ -1,9 +1,12 @@
 package org.yframework.toolkit;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -106,6 +109,39 @@ public enum TimeUtil
     public String getWeek()
     {
         return get(Instant.now(), _PATTERN_WEEK);
+    }
+
+    /**
+     * 将日期字符串转化为日期对象
+     * @param dateStr
+     * @param format
+     * @returns {String}
+     */
+    public Date parseDate(String dateStr, String format){
+        SimpleDateFormat loc_sdf = new SimpleDateFormat(format);
+        Date result = null;
+        try
+        {
+            result = loc_sdf.parse(dateStr);
+        }
+        catch (ParseException e)
+        {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    /**
+     * 将日期字符串转化为日历对象
+     * @param dateStr
+     * @param format
+     * @returns {String}
+     */
+    public Calendar parseCalendar(String dateStr, String format){
+        Date date = this.parseDate(dateStr, format);
+        Calendar result = Calendar.getInstance();
+        result.setTimeInMillis(date.getTime());
+        return result;
     }
 
 }

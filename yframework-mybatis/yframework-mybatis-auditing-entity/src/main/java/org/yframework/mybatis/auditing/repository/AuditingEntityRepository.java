@@ -23,6 +23,9 @@ public interface AuditingEntityRepository<DO>
     @SelectProvider(type = AuditingEntitySqlProvider.class, method = AuditingEntitySqlProvider._METHOD_FIND_ONE)
     DO findOne(DO entity);
 
+    @SelectProvider(type = AuditingEntitySqlProvider.class, method = AuditingEntitySqlProvider._METHOD_FIND_BY_ID)
+    DO findById(DO entity);
+
     @SelectProvider(type = AuditingEntitySqlProvider.class, method = AuditingEntitySqlProvider._METHOD_FIND_ALL)
     List<DO> findAll(Class<DO> cls);
 

@@ -22,11 +22,11 @@ import java.util.List;
 @Transactional(readOnly = true)
 public abstract class AbstractAuditingEntityService<DO extends AuditingEntity, DTO extends AuditingEntityDTO> implements AuditingEntityService<DO, DTO>
 {
-    private static final String _CACHE_KEY_SP_ONE = "#root.targetClass.name + '-' + #dto.id";
-    private static final String _CACHE_KEY_SP_ALL = "#root.targetClass.name + '-all'";
-    private static final String _CACHE_KEY_SP_COUNT_ALL = "#root.targetClass.name + '-count'";
+    protected static final String _CACHE_KEY_SP_ONE = "#root.targetClass.name + '-' + #dto.id";
+    protected static final String _CACHE_KEY_SP_ALL = "#root.targetClass.name + '-all'";
+    protected static final String _CACHE_KEY_SP_COUNT_ALL = "#root.targetClass.name + '-count'";
 
-    private final Class<DO> cls;
+    protected final Class<DO> cls;
 
     protected AbstractAuditingEntityService()
     {
@@ -66,6 +66,15 @@ public abstract class AbstractAuditingEntityService<DO extends AuditingEntity, D
     }
 
     @Override
+    @Cacheable(key = _CACHE_KEY_SP_ONE)
+    public DTO findById(DTO dto)
+    {
+        DO e = getMapper().dtoToDo(dto);
+        dto = getMapper().doToDto(getRepository().findById(e));
+        return dto;
+    }
+
+    @Override
     @Cacheable(key = _CACHE_KEY_SP_ALL)
     public List<DTO> findAll()
     {
@@ -90,7 +99,7 @@ public abstract class AbstractAuditingEntityService<DO extends AuditingEntity, D
 //        return new PageImpl<>(getMapper().dosToDtos(es), pageable, count);
         DO e = getMapper().dtoToDo(dto);
         com.github.pagehelper.Page<DO> pageTmp = PageHelper.
-            startPage(pageable.getPageNumber(), pageable.getPageSize()).
+            startPage(pageable.getPageNumber() + 1, pageable.getPageSize()).
             doSelectPage(() -> getRepository().findPage(e, pageable));
         Page<DO> page = new PageImpl<>(pageTmp.getResult(), pageable, pageTmp.getTotal());
         return page.map(aDo -> getMapper().doToDto(aDo));

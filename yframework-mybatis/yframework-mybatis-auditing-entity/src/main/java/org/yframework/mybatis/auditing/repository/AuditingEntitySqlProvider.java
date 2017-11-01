@@ -29,6 +29,7 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
     public static final String _METHOD_UPDATE = "update";
 
     public static final String _METHOD_FIND_ONE = "findOne";
+    public static final String _METHOD_FIND_BY_ID = "findById";
     public static final String _METHOD_FIND_ALL = "findAll";
     public static final String _METHOD_FIND_LIST = "findList";
     public static final String _METHOD_FIND_PAGE = "findPage";
@@ -68,6 +69,14 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
     public String findOne(E entity)
     {
         return this.buildQuerySQL(entity);
+    }
+
+    public String findById(E entity)
+    {
+        Table table = this.getTable(entity);
+        SQL sql = new SQL().FROM(table.name());
+        sql = this.buildWhereIdsSQL(sql, entity);
+        return sql.toString();
     }
 
     public String findAll(Class<E> cls)
@@ -222,7 +231,8 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
                     sql.SELECT(col);
                     if (null != val)
                     {
-                        String cond = this.getCondition(col, param);
+//                        String cond = this.getCondition(col, param);
+                        String cond = this.getLikeCondition(col, param); // 条件改为模糊查询 zk 2017.10.27
                         sql.WHERE(cond);
                     }
                 });
@@ -266,12 +276,37 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         return sql;
     }
 
+    private SQL buildWhereIdsSQL(SQL sql, E entity)
+    {
+        Set<Field> fieldSet = getAllFields(entity);
+        fieldSet.stream().
+            filter(field -> field.isAnnotationPresent(Column.class)).
+            forEach(field ->
+            {
+                FieldObject fieldObject = getFieldObj(field, entity);
+                Column column = field.getAnnotation(Column.class);
+                String col = this.getCol(fieldObject, column);
+                sql.SELECT(col);
+                if(field.isAnnotationPresent(Id.class))
+                {
+                    String param = this.getParameter(fieldObject, null);
+                    Object val = this.getVal(fieldObject, entity);
+                    if (null != val)
+                    {
+                        String cond = this.getCondition(col, param);
+                        sql.WHERE(cond);
+                    }
+                }
+            });
+        return sql;
+    }
+
     private SQL buildOrdersSQL(SQL sql, Sort sort)
     {
         sort.spliterator().
                 forEachRemaining(order ->
                 {
-                    sql.ORDER_BY(AuditingEntityCtrl.INSTANCE.getCol(order.getProperty()));
+                    sql.ORDER_BY(AuditingEntityCtrl.INSTANCE.getCol(order.getProperty()) + " " + order.getDirection());
                 });
         return sql;
     }
@@ -326,6 +361,12 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
     private String getCondition(String col, Object param)
     {
         return col + " = " + param;
+    }
+
+    private String getLikeCondition(String col, Object param)
+    {
+        String likeParam = "'%' || " + param + " || '%'";
+        return col + " LIKE " + likeParam;
     }
 
     private Table getTable(E entity)

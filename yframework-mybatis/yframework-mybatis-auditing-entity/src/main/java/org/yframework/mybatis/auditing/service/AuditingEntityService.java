@@ -24,6 +24,8 @@ public interface AuditingEntityService<DO extends AuditingEntity, DTO extends Au
 
     DTO findOne(DTO dto);
 
+    DTO findById(DTO dto);
+
     List<DTO> findAll();
 
     List<DTO> findAll(DTO dto);

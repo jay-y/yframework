@@ -12,7 +12,6 @@ public interface JsonUtil
 {
     /**
      * 对象转JSON字符串
-     *
      * @param object
      * @return
      */
@@ -20,7 +19,6 @@ public interface JsonUtil
 
     /**
      * 对象转JSON字符串(格式化后的)
-     *
      * @param object
      * @return
      */
@@ -28,7 +26,6 @@ public interface JsonUtil
 
     /**
      * Json字符串转对象
-     *
      * @param json
      * @param cls
      * @param <T>
@@ -38,7 +35,6 @@ public interface JsonUtil
 
     /**
      * Json字符串转换成List
-     *
      * @param json
      * @param cls
      * @param <T>
@@ -48,7 +44,6 @@ public interface JsonUtil
 
     /**
      * Json字符串转换成List<Map>
-     *
      * @param json
      * @return
      */
@@ -56,7 +51,6 @@ public interface JsonUtil
 
     /**
      * Json字符串转换成Map
-     *
      * @param json
      * @return
      */
