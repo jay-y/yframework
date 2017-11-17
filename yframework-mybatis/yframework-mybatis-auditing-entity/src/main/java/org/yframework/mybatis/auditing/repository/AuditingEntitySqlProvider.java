@@ -29,7 +29,7 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
     public static final String _METHOD_UPDATE = "update";
 
     public static final String _METHOD_FIND_ONE = "findOne";
-    public static final String _METHOD_FIND_BY_ID = "findById";
+    public static final String _METHOD_FIND_ONE_BY_ID = "findOneById";
     public static final String _METHOD_FIND_ALL = "findAll";
     public static final String _METHOD_FIND_LIST = "findList";
     public static final String _METHOD_FIND_PAGE = "findPage";
@@ -71,7 +71,7 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         return this.buildQuerySQL(entity);
     }
 
-    public String findById(E entity)
+    public String findOneById(E entity)
     {
         Table table = this.getTable(entity);
         SQL sql = new SQL().FROM(table.name());
@@ -280,24 +280,24 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
     {
         Set<Field> fieldSet = getAllFields(entity);
         fieldSet.stream().
-            filter(field -> field.isAnnotationPresent(Column.class)).
-            forEach(field ->
-            {
-                FieldObject fieldObject = getFieldObj(field, entity);
-                Column column = field.getAnnotation(Column.class);
-                String col = this.getCol(fieldObject, column);
-                sql.SELECT(col);
-                if(field.isAnnotationPresent(Id.class))
+                filter(field -> field.isAnnotationPresent(Column.class)).
+                forEach(field ->
                 {
-                    String param = this.getParameter(fieldObject, null);
-                    Object val = this.getVal(fieldObject, entity);
-                    if (null != val)
+                    FieldObject fieldObject = getFieldObj(field, entity);
+                    Column column = field.getAnnotation(Column.class);
+                    String col = this.getCol(fieldObject, column);
+                    sql.SELECT(col);
+                    if (field.isAnnotationPresent(Id.class))
                     {
-                        String cond = this.getCondition(col, param);
-                        sql.WHERE(cond);
+                        String param = this.getParameter(fieldObject, null);
+                        Object val = this.getVal(fieldObject, entity);
+                        if (null != val)
+                        {
+                            String cond = this.getCondition(col, param);
+                            sql.WHERE(cond);
+                        }
                     }
-                }
-            });
+                });
         return sql;
     }
 

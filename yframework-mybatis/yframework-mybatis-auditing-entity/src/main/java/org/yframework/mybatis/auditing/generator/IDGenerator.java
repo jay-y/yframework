@@ -38,5 +38,5 @@ public enum IDGenerator implements Generator<String>
                         throw new RuntimeException(e);
                     }
                 }
-            }; //生成随机值的MD5值
+            } //生成随机值的MD5值
 }

@@ -20,11 +20,15 @@ public interface AuditingEntityService<DO extends AuditingEntity, DTO extends Au
 
     <MAPPER extends AuditingEntityMapper<DO, DTO>> MAPPER getMapper();
 
+    DTO insert(DTO dto);
+
+    DTO update(DTO dto);
+
     DTO save(DTO dto);
 
     DTO findOne(DTO dto);
 
-    DTO findById(DTO dto);
+    DTO findOneById(DTO dto);
 
     List<DTO> findAll();
 
