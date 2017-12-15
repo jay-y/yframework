@@ -3,6 +3,7 @@ package org.yframework.mybatis.auditing.repository;
 import org.apache.ibatis.jdbc.SQL;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.yframework.mybatis.auditing.annotation.Condition;
 import org.yframework.mybatis.auditing.domain.AuditingEntity;
 import org.yframework.mybatis.auditing.domain.FieldObject;
 import org.yframework.mybatis.auditing.utils.AuditingEntityCtrl;
@@ -224,6 +225,7 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
                 forEach(field ->
                 {
                     Column column = field.getAnnotation(Column.class);
+                    Condition condition = field.getAnnotation(Condition.class);
                     FieldObject fieldObject = getFieldObj(field, entity);
                     String col = this.getCol(fieldObject, column);
                     String param = this.getParameter(fieldObject, _PARAME_KEY_DO);
@@ -231,8 +233,15 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
                     sql.SELECT(col);
                     if (null != val)
                     {
-//                        String cond = this.getCondition(col, param);
-                        String cond = this.getLikeCondition(col, param); // 条件改为模糊查询 zk 2017.10.27
+                        String cond;
+                        if (null != condition && !condition.like())
+                        {
+                            cond = this.getCondition(col, param);
+                        }
+                        else
+                        {
+                            cond = this.getLikeCondition(col, param);
+                        }
                         sql.WHERE(cond);
                     }
                 });

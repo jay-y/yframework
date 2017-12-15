@@ -1,5 +1,7 @@
 package org.yframework.mybatis.auditing.domain;
 
+import org.yframework.mybatis.auditing.annotation.Condition;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +15,7 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(generator = "uuid22")
     @Column(name = "id")
     private ID id;
 
@@ -29,6 +31,7 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
 
+    @Condition(like = false)
     @Column(name = "activated")
     private boolean activated = true;
 
