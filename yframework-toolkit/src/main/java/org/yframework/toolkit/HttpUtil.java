@@ -46,6 +46,7 @@ public enum HttpUtil
     public final static String _UTF_8 = "UTF-8";
     public final static String _CONTENT_TYPE_JSON = "application/json";
     public final static String _CONTENT_TYPE_XML = "application/xml";
+    public final static String _CONTENT_TYPE_FORM = "application/x-www-form-urlencoded";
     private final static int _TIMEOUT_SOCKET = 10000;
     private final static int _TIMEOUT_CONNECT = 10000;
     private final static int _TIMEOUT_CONNECTION_REQUEST = 10000;
@@ -223,15 +224,30 @@ public enum HttpUtil
         return doRequestWithJSON(httpPost, json.toString(), _UTF_8);
     }
 
-    public String doPostWhithXML(String apiUrl, String xmlinfo) throws Exception
-    {
-        return doPostWhithXML(apiUrl, xmlinfo, _UTF_8);
-    }
-
-    public String doPostWhithXML(String apiUrl, String xmlinfo, String encoding) throws Exception
+    /**
+     * 发送 POST 请求（HTTP），FORM形式
+     *
+     * @param apiUrl
+     * @param form
+     * @return
+     */
+    public String doPostWithForm(String apiUrl, String form) throws Exception
     {
         HttpPost httpPost = new HttpPost(apiUrl);
-        return doRequestWithXML(httpPost, xmlinfo, encoding);
+        return doRequestWithForm(httpPost, form, _UTF_8);
+    }
+
+    /**
+     * 发送 POST 请求（HTTP），XML形式
+     *
+     * @param apiUrl
+     * @param xmlinfo
+     * @return
+     */
+    public String doPostWithXML(String apiUrl, String xmlinfo) throws Exception
+    {
+        HttpPost httpPost = new HttpPost(apiUrl);
+        return doRequestWithXML(httpPost, xmlinfo, _UTF_8);
     }
 
     /**
@@ -287,28 +303,37 @@ public enum HttpUtil
         return httpStr;
     }
 
-    /**
-     * 发送 SSL POST 请求（HTTPS），JSON形式
-     *
-     * @param apiUrl API接口URL
-     * @param json   JSON对象
-     * @return
-     */
     public String doPostSSL(String apiUrl, Object json) throws Exception
     {
         HttpPost httpPost = new HttpPost(apiUrl);
         return doRequestSSLWithJSON(httpPost, json.toString(), _UTF_8);
     }
 
-    public String doPostSSLWhithXML(String apiUrl, String xmlinfo) throws Exception
+    public String doPostSSLWithForm(String apiUrl, String form) throws Exception
     {
-        return doPostSSLWhithXML(apiUrl, xmlinfo, _UTF_8);
+        return doPostSSLWithForm(apiUrl, form, _UTF_8);
     }
 
-    public String doPostSSLWhithXML(String apiUrl, String xmlinfo, String encoding) throws Exception
+    public String doPostSSLWithForm(String apiUrl, String form, String encoding) throws Exception
+    {
+        HttpPost httpPost = new HttpPost(apiUrl);
+        return doRequestSSLWithForm(httpPost, form, encoding);
+    }
+
+    public String doPostSSLWithXML(String apiUrl, String xmlinfo) throws Exception
+    {
+        return doPostSSLWithXML(apiUrl, xmlinfo, _UTF_8);
+    }
+
+    public String doPostSSLWithXML(String apiUrl, String xmlinfo, String encoding) throws Exception
     {
         HttpPost httpPost = new HttpPost(apiUrl);
         return doRequestSSLWithXML(httpPost, xmlinfo, encoding);
+    }
+
+    private String doRequestWithForm(HttpEntityEnclosingRequestBase request, String form, String encoding) throws Exception
+    {
+        return this.doRequest(request, form, encoding, _CONTENT_TYPE_FORM);
     }
 
     private String doRequestWithJSON(HttpEntityEnclosingRequestBase request, String json, String encoding) throws Exception
@@ -326,6 +351,11 @@ public enum HttpUtil
         return this.doRequestSSL(request, json, encoding, _CONTENT_TYPE_JSON);
     }
 
+    private String doRequestSSLWithForm(HttpEntityEnclosingRequestBase request, String form, String encoding) throws Exception
+    {
+        return this.doRequestSSL(request, form, encoding, _CONTENT_TYPE_FORM);
+    }
+
     private String doRequestSSLWithXML(HttpEntityEnclosingRequestBase request, String message, String encoding) throws Exception
     {
         return this.doRequestSSL(request, message, encoding, _CONTENT_TYPE_XML);
@@ -333,6 +363,7 @@ public enum HttpUtil
 
     private String doRequest(HttpEntityEnclosingRequestBase request, String message, String encoding, String contentType) throws Exception
     {
+        log.debug("DO REQUEST: " + message);
         StringEntity stringEntity = new StringEntity(message, encoding);
         stringEntity.setContentEncoding(encoding);
         stringEntity.setContentType(contentType);
@@ -353,6 +384,7 @@ public enum HttpUtil
 
     private String doRequestSSL(HttpEntityEnclosingRequestBase request, String message, String encoding, String contentType) throws Exception
     {
+        log.debug("DO REQUEST WITH SSL: " + message);
         StringEntity stringEntity = new StringEntity(message, encoding);
         stringEntity.setContentEncoding(encoding);
         stringEntity.setContentType(contentType);

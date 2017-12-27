@@ -19,6 +19,9 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
     @Column(name = "id")
     private ID id;
 
+    @Column(name = "remark")
+    private String remark;
+
     @Column(name = "created_by")
     private String createdBy;
 
@@ -53,6 +56,16 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
     public void setId(ID id)
     {
         this.id = id;
+    }
+
+    public String getRemark()
+    {
+        return remark;
+    }
+
+    public void setRemark(String remark)
+    {
+        this.remark = remark;
     }
 
     @Override
