@@ -18,6 +18,11 @@ public enum GsonUtil implements JsonUtil
         gson = new Gson();
     }
 
+    public Gson get()
+    {
+        return gson;
+    }
+
     public String toJson(Object object)
     {
         String jsonString = null;

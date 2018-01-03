@@ -36,6 +36,11 @@ public enum JacksonXmlUtil implements XmlUtil
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
     }
 
+    public XmlMapper get()
+    {
+        return objectMapper;
+    }
+
     @Override
     public <T> String toXml(T object)
     {

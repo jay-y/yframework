@@ -44,6 +44,11 @@ public enum JacksonUtil implements JsonUtil
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
     }
 
+    public ObjectMapper get()
+    {
+        return objectMapper;
+    }
+
     public String toJson(Object object)
     {
         String jsonString;
