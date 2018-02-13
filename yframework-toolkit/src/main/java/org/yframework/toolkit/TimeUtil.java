@@ -34,6 +34,11 @@ public enum TimeUtil
         return this.get(Instant.now(), pattern);
     }
 
+    public LocalDateTime nowLocal()
+    {
+        return LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+    }
+
     /**
      * 格式化时间
      *
@@ -69,6 +74,44 @@ public enum TimeUtil
     public String get(Date time, String pattern)
     {
         return this.get(time.getTime(), pattern);
+    }
+
+    public String get(String time, String oldPattern, String newPattern)
+    {
+        LocalDateTime localDateTime = this.getLocal(time, oldPattern);
+        return localDateTime.format(DateTimeFormatter.ofPattern(newPattern));
+    }
+
+    public LocalDateTime getLocal(String time, String format)
+    {
+        Date date = this.getDate(time, format);
+        return getLocal(date);
+    }
+
+    public LocalDateTime getLocal(Instant time)
+    {
+        return LocalDateTime.ofInstant(time, ZoneId.systemDefault());
+    }
+
+    public LocalDateTime getLocal(Date date)
+    {
+        Instant instant = date.toInstant();
+        ZoneId zone = ZoneId.systemDefault();
+        return LocalDateTime.ofInstant(instant, zone);
+    }
+
+    public Date getDate(String time, String format)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        try
+        {
+            return sdf.parse(time);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -113,11 +156,13 @@ public enum TimeUtil
 
     /**
      * 将日期字符串转化为日期对象
+     *
      * @param dateStr
      * @param format
      * @returns {String}
      */
-    public Date parseDate(String dateStr, String format){
+    public Date parseDate(String dateStr, String format)
+    {
         SimpleDateFormat loc_sdf = new SimpleDateFormat(format);
         Date result = null;
         try
@@ -133,15 +178,63 @@ public enum TimeUtil
 
     /**
      * 将日期字符串转化为日历对象
+     *
      * @param dateStr
      * @param format
      * @returns {String}
      */
-    public Calendar parseCalendar(String dateStr, String format){
+    public Calendar parseCalendar(String dateStr, String format)
+    {
         Date date = this.parseDate(dateStr, format);
         Calendar result = Calendar.getInstance();
         result.setTimeInMillis(date.getTime());
         return result;
     }
 
+    public boolean nowIsBetween(String start, String end)
+    {
+        return this.nowIsBetween(start, end, _PATTERN);
+    }
+
+    public boolean nowIsBetween(String start, String end, String format)
+    {
+        return this.isBetween(this.now(), start, end, format);
+    }
+
+    /**
+     * 判断指定时间是否在起始结束时间之间
+     *
+     * @param curr
+     * @param start
+     * @param end
+     * @param format
+     * @return boolean
+     */
+    public boolean isBetween(String curr, String start, String end, String format)
+    {
+        LocalDateTime currLocal = y.util().time().getLocal(curr, format);
+        LocalDateTime startLocal = y.util().time().getLocal(start, format);
+        LocalDateTime endLocal = y.util().time().getLocal(end, format);
+        return (currLocal.isEqual(startLocal) || currLocal.isAfter(startLocal)) && (currLocal.isEqual(endLocal) || currLocal.isBefore(endLocal));
+    }
+
+    public boolean isEqual(String curr, String target)
+    {
+        return this.isEqual(curr, target, _PATTERN);
+    }
+
+    /**
+     * 判断两日期时间是否相等
+     *
+     * @param curr
+     * @param target
+     * @param format
+     * @return boolean
+     */
+    public boolean isEqual(String curr, String target, String format)
+    {
+        LocalDateTime currLocal = y.util().time().getLocal(curr, format);
+        LocalDateTime targetLocal = y.util().time().getLocal(target, format);
+        return currLocal.isEqual(targetLocal);
+    }
 }

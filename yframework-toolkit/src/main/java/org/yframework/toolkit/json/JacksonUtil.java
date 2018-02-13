@@ -7,6 +7,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.apache.commons.lang3.StringUtils;
 import org.yframework.toolkit.JsonUtil;
 
@@ -22,7 +25,10 @@ public enum JacksonUtil implements JsonUtil
 
     JacksonUtil()
     {
-        objectMapper = new ObjectMapper();
+        objectMapper = new ObjectMapper().
+            registerModule(new ParameterNamesModule()).
+            registerModule(new Jdk8Module()).
+            registerModule(new JavaTimeModule());
         //设置null值不参与序列化(字段不被显示)
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         // 对于空的对象转json的时候不抛出错误

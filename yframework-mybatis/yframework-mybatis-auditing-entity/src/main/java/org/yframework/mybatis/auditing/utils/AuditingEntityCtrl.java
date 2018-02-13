@@ -89,7 +89,7 @@ public enum AuditingEntityCtrl
         return col;
     }
 
-    public <O extends Object> Set<Field> getAllFields(O obj)
+    public <O> Set<Field> getAllFields(O obj)
     {
         String key = obj.getClass().getName();
         Set<Field> fieldSet = getFieldsMap().get(key);
@@ -113,7 +113,7 @@ public enum AuditingEntityCtrl
         return fieldSet;
     }
 
-    public <O extends Object> FieldObject getFieldObj(Field field, O obj)
+    public <O> FieldObject getFieldObj(Field field, O obj)
     {
         String key = this.formatKey(obj.getClass().getName(), field.getName());
         FieldObject fieldObject = getFieldObjMap().get(key);

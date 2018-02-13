@@ -5,11 +5,10 @@
 
     <groupId>org.yframework</groupId>
     <artifactId>yframework</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
     <modules>
         <module>yframework-toolkit</module>
         <module>yframework-mybatis</module>
-        <module>yframework-system</module>
     </modules>
     <packaging>pom</packaging>
 

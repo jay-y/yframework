@@ -1,6 +1,7 @@
 package org.yframework.mybatis.auditing.domain;
 
 import org.yframework.mybatis.auditing.annotation.Condition;
+import org.yframework.mybatis.auditing.utils.SQLRelationOperator;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public abstract class AbstractAuditingEntity<ID extends Serializable> implements
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
 
-    @Condition(like = false)
+    @Condition(operator = SQLRelationOperator.EQ)
     @Column(name = "activated")
     private boolean activated = true;
 

@@ -863,4 +863,20 @@ public class StringUtil extends StringUtils
         }
         return new String(bytes, encoding);
     }
+
+    /**
+     * 判断是否为定长的数字
+     *
+     * @param str
+     * @param len
+     * @return
+     */
+    public boolean isNumber(String str, int len)
+    {
+        if (!str.matches("\\d{" + len + "}"))
+        {
+            return false;
+        }
+        return true;
+    }
 }
