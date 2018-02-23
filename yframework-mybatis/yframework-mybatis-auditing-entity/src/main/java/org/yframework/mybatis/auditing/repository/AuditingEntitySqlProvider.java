@@ -140,19 +140,19 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         SQL sql = new SQL().INSERT_INTO(table.name());
         Set<Field> fieldSet = getAllFields(entity);
         fieldSet.stream().
-                filter(field -> field.isAnnotationPresent(Column.class)).
-                forEach(field ->
+            filter(field -> field.isAnnotationPresent(Column.class)).
+            forEach(field ->
+            {
+                Column column = field.getAnnotation(Column.class);
+                FieldObject fieldObject = getFieldObj(field, entity);
+                String col = this.getCol(fieldObject, column);
+                String param = this.getParameter(fieldObject, null);
+                Object val = this.getVal(fieldObject, entity);
+                if (null != val)
                 {
-                    Column column = field.getAnnotation(Column.class);
-                    FieldObject fieldObject = getFieldObj(field, entity);
-                    String col = this.getCol(fieldObject, column);
-                    String param = this.getParameter(fieldObject, null);
-                    Object val = this.getVal(fieldObject, entity);
-                    if (null != val)
-                    {
-                        sql.INTO_COLUMNS(col).INTO_VALUES(param);
-                    }
-                });
+                    sql.INTO_COLUMNS(col).INTO_VALUES(param);
+                }
+            });
         return sql.toString();
     }
 
@@ -162,27 +162,27 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         SQL sql = new SQL().UPDATE(table.name());
         Set<Field> fieldSet = getAllFields(entity);
         fieldSet.stream().
-                filter(field -> field.isAnnotationPresent(Column.class)).
-                forEach(field ->
+            filter(field -> field.isAnnotationPresent(Column.class)).
+            forEach(field ->
+            {
+                Column column = field.getAnnotation(Column.class);
+                FieldObject fieldObject = getFieldObj(field, entity);
+                String col = this.getCol(fieldObject, column);
+                String param = this.getParameter(fieldObject, null);
+                Object val = this.getVal(fieldObject, entity);
+                if (null != val)
                 {
-                    Column column = field.getAnnotation(Column.class);
-                    FieldObject fieldObject = getFieldObj(field, entity);
-                    String col = this.getCol(fieldObject, column);
-                    String param = this.getParameter(fieldObject, null);
-                    Object val = this.getVal(fieldObject, entity);
-                    if (null != val)
+                    String cond = this.getCondition(col, param, val);
+                    if (field.isAnnotationPresent(Id.class))
                     {
-                        String cond = this.getCondition(col, param, val);
-                        if (field.isAnnotationPresent(Id.class))
-                        {
-                            sql.WHERE(cond);
-                        }
-                        else
-                        {
-                            sql.SET(cond);
-                        }
+                        sql.WHERE(cond);
                     }
-                });
+                    else
+                    {
+                        sql.SET(cond);
+                    }
+                }
+            });
         return sql.toString();
     }
 
@@ -192,21 +192,21 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         SQL sql = new SQL().FROM(table.name());
         Set<Field> fieldSet = getAllFields(entity);
         fieldSet.stream().
-                filter(field -> field.isAnnotationPresent(Column.class)).
-                forEach(field ->
+            filter(field -> field.isAnnotationPresent(Column.class)).
+            forEach(field ->
+            {
+                Column column = field.getAnnotation(Column.class);
+                FieldObject fieldObject = getFieldObj(field, entity);
+                String col = this.getCol(fieldObject, column);
+                String param = this.getParameter(fieldObject, null);
+                Object val = this.getVal(fieldObject, entity);
+                sql.SELECT(col);
+                if (null != val)
                 {
-                    Column column = field.getAnnotation(Column.class);
-                    FieldObject fieldObject = getFieldObj(field, entity);
-                    String col = this.getCol(fieldObject, column);
-                    String param = this.getParameter(fieldObject, null);
-                    Object val = this.getVal(fieldObject, entity);
-                    sql.SELECT(col);
-                    if (null != val)
-                    {
-                        String cond = this.getCondition(col, param, val);
-                        sql.WHERE(cond);
-                    }
-                });
+                    String cond = this.getCondition(col, param, val);
+                    sql.WHERE(cond);
+                }
+            });
         return sql.toString();
     }
 
@@ -223,22 +223,22 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         }
         Set<Field> fieldSet = getAllFields(entity);
         fieldSet.stream().
-                filter(field -> field.isAnnotationPresent(Column.class)).
-                forEach(field ->
+            filter(field -> field.isAnnotationPresent(Column.class)).
+            forEach(field ->
+            {
+                Column column = field.getAnnotation(Column.class);
+                Condition condition = field.getAnnotation(Condition.class);
+                FieldObject fieldObject = getFieldObj(field, entity);
+                String col = this.getCol(fieldObject, column);
+                String param = this.getParameter(fieldObject, _PARAME_KEY_DO);
+                Object val = this.getVal(fieldObject, entity);
+                sql.SELECT(col);
+                if (null != val)
                 {
-                    Column column = field.getAnnotation(Column.class);
-                    Condition condition = field.getAnnotation(Condition.class);
-                    FieldObject fieldObject = getFieldObj(field, entity);
-                    String col = this.getCol(fieldObject, column);
-                    String param = this.getParameter(fieldObject, _PARAME_KEY_DO);
-                    Object val = this.getVal(fieldObject, entity);
-                    sql.SELECT(col);
-                    if (null != val)
-                    {
-                        String cond = this.getCondition(col, param, val, (null != condition ? condition.operator() : null));
-                        sql.WHERE(cond);
-                    }
-                });
+                    String cond = this.getCondition(col, param, val, (null != condition ? condition.operator() : null));
+                    sql.WHERE(cond);
+                }
+            });
         return sql.toString();
     }
 
@@ -262,20 +262,20 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
     {
         Set<Field> fieldSet = getAllFields(entity);
         fieldSet.stream().
-                filter(field -> field.isAnnotationPresent(Column.class)).
-                forEach(field ->
+            filter(field -> field.isAnnotationPresent(Column.class)).
+            forEach(field ->
+            {
+                Column column = field.getAnnotation(Column.class);
+                FieldObject fieldObject = getFieldObj(field, entity);
+                String col = this.getCol(fieldObject, column);
+                String param = this.getParameter(fieldObject, null);
+                Object val = this.getVal(fieldObject, entity);
+                if (null != val)
                 {
-                    Column column = field.getAnnotation(Column.class);
-                    FieldObject fieldObject = getFieldObj(field, entity);
-                    String col = this.getCol(fieldObject, column);
-                    String param = this.getParameter(fieldObject, null);
-                    Object val = this.getVal(fieldObject, entity);
-                    if (null != val)
-                    {
-                        String cond = this.getCondition(col, param, val);
-                        sql.WHERE(cond);
-                    }
-                });
+                    String cond = this.getCondition(col, param, val);
+                    sql.WHERE(cond);
+                }
+            });
         return sql;
     }
 
@@ -283,34 +283,34 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
     {
         Set<Field> fieldSet = getAllFields(entity);
         fieldSet.stream().
-                filter(field -> field.isAnnotationPresent(Column.class)).
-                forEach(field ->
+            filter(field -> field.isAnnotationPresent(Column.class)).
+            forEach(field ->
+            {
+                FieldObject fieldObject = getFieldObj(field, entity);
+                Column column = field.getAnnotation(Column.class);
+                String col = this.getCol(fieldObject, column);
+                sql.SELECT(col);
+                if (field.isAnnotationPresent(Id.class))
                 {
-                    FieldObject fieldObject = getFieldObj(field, entity);
-                    Column column = field.getAnnotation(Column.class);
-                    String col = this.getCol(fieldObject, column);
-                    sql.SELECT(col);
-                    if (field.isAnnotationPresent(Id.class))
+                    String param = this.getParameter(fieldObject, null);
+                    Object val = this.getVal(fieldObject, entity);
+                    if (null != val)
                     {
-                        String param = this.getParameter(fieldObject, null);
-                        Object val = this.getVal(fieldObject, entity);
-                        if (null != val)
-                        {
-                            String cond = this.getCondition(col, param, val);
-                            sql.WHERE(cond);
-                        }
+                        String cond = this.getCondition(col, param, val);
+                        sql.WHERE(cond);
                     }
-                });
+                }
+            });
         return sql;
     }
 
     protected SQL buildOrdersSQL(SQL sql, Sort sort)
     {
         sort.spliterator().
-                forEachRemaining(order ->
-                {
-                    sql.ORDER_BY(AuditingEntityCtrl.INSTANCE.getCol(order.getProperty()) + " " + order.getDirection());
-                });
+            forEachRemaining(order ->
+            {
+                sql.ORDER_BY(AuditingEntityCtrl.INSTANCE.getCol(order.getProperty()) + " " + order.getDirection());
+            });
         return sql;
     }
 
@@ -338,9 +338,9 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         {
             Set<Field> fieldSet = this.getAllFields(fieldObject.getType());
             Column column = fieldSet.stream().
-                    filter(f -> f.isAnnotationPresent(Id.class)).
-                    map(f -> f.getAnnotation(Column.class)).
-                    findFirst().get();
+                filter(f -> f.isAnnotationPresent(Id.class)).
+                map(f -> f.getAnnotation(Column.class)).
+                findFirst().get();
             parameter.append(".");
             parameter.append(column.name());
         }
@@ -372,7 +372,14 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         operator = null != operator ? operator : SQLRelationOperator.LIKE;
         if (SQLRelationOperator.LIKE.equals(operator))
         {
-            if (val instanceof Instant || val instanceof Date)
+            if (!(val instanceof Instant) && !(val instanceof Date))
+            {
+                String param1 = "CONCAT(\'%\', CONCAT(" + param + ", \'%\'))";
+                sql.append(col);
+                sql.append(operator.get());
+                sql.append(param1);
+            }
+            else
             {
                 String date;
                 if (val instanceof Instant)
@@ -383,23 +390,17 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
                 {
                     date = y.util().time().get((Date) val, "yyyy-MM-dd");
                 }
+
                 if (StringUtil.isNotBlank(date))
                 {
-                    String startDate = "'" + date + " 00:00:00'";
-                    String endDate = "'" + date + " 23:59:59'";
+                    String startDate = "\'" + date + " 00:00:00\'";
+                    String endDate = "\'" + date + " 23:59:59\'";
                     sql.append(col);
                     sql.append(" BETWEEN ");
                     sql.append(startDate);
                     sql.append(" AND ");
                     sql.append(endDate);
                 }
-            }
-            else
-            {
-                param = "CONCAT('%', CONCAT(" + param + ", '%'))";
-                sql.append(col);
-                sql.append(operator.get());
-                sql.append(param);
             }
         }
         else
