@@ -1,0 +1,14 @@
+[
+  {
+    "id": "test",
+    "name": "gh_b7d32d98873f",
+    "apiKey": "wx467eda1b531abaa0",
+    "apiSecret": "9257ecf26b2828992e23448ddf704860",
+    "mchId": "1253759901",
+    "mchKey": "9257ecf26b2828992e23448ddf704860",
+    "certPath": "/usr/apiclient_cert.p12",
+    "certPassword": "1253759901",
+    "token": "becypress",
+    "aesKey": ""
+  }
+]

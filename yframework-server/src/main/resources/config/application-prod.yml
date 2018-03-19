@@ -1,0 +1,121 @@
+# ===================================================================
+# Spring Boot configuration for the "prod" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: https://jhipster.github.io/profiles/
+# More information on configuration properties: https://jhipster.github.io/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+#eureka:
+#    instance:
+#        prefer-ip-address: true
+#    client:
+#        enabled: true
+#        healthcheck:
+#            enabled: true
+#        registerWithEureka: true
+#        fetchRegistry: true
+#        serviceUrl:
+#            defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
+
+spring:
+    profiles:
+        active: prod
+    autoconfigure:
+        exclude: org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration
+    devtools:
+        restart:
+            enabled: false
+        livereload:
+            enabled: false
+#   H2 Database
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:h2:file:./temp/h2db/test;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        username: test
+        password:
+    h2:
+        console:
+            enabled: true
+#    datasource:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        url: jdbc:mysql://localhost:3306/db?useUnicode=true&characterEncoding=utf8&useSSL=false
+#        username: root
+#        password: root
+#        hikari:
+#            maximum-pool-size: 1000
+#            data-source-properties:
+#                cachePrepStmts: true
+#                prepStmtCacheSize: 250
+#                prepStmtCacheSqlLimit: 2048
+#                useServerPrepStmts: true
+    mail:
+        host: localhost
+        port: 25
+        username:
+        password:
+    thymeleaf:
+        cache: true
+    redis:
+        database: 0
+        host: 127.0.0.1
+        port: 6379
+        password: BaoFengYun
+        pool:
+          max-active: 8
+          max-wait: -1
+          max-idle: 8
+          min-idle: 0
+
+liquibase:
+    contexts: prod
+    enabled: false
+
+# ===================================================================
+# To enable SSL, generate a certificate using:
+# keytool -genkey -alias server -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+#
+# You can also use Let's Encrypt:
+# https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
+#
+# Then, modify the server.ssl properties so your "server" configuration looks like:
+#
+# server:
+#    port: 443
+#    ssl:
+#        key-store: keystore.p12
+#        key-store-password: <your-password>
+#        keyStoreType: PKCS12
+#        keyAlias: server
+# ===================================================================
+server:
+    port: 8080
+    compression:
+        enabled: true
+        mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+        min-response-size: 1024
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://jhipster.github.io/common-application-properties/
+# ===================================================================
+
+application:
+    http:
+        version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
+        cache: # Used by the CachingHttpHeadersFilter
+            timeToLiveInDays: 1461
+    mail: # specific JHipster mail property, for standard properties see MailProperties
+        from: y@localhost
+        base-url: http://my-server-url-to-change # Modify according to your server's URL

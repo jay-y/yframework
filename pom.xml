@@ -9,6 +9,7 @@
     <modules>
         <module>yframework-toolkit</module>
         <module>yframework-mybatis</module>
+        <module>yframework-server</module>
     </modules>
     <packaging>pom</packaging>
 

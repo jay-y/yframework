@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cust.system.repository.RoleMenuRelationRepository">
+    <sql id="tableName">
+        SYS_ROLE_MENU
+    </sql>
+
+    <sql id="tableAlias">
+        <include refid="tableName"/>
+        o
+    </sql>
+
+    <sql id="columns">
+        o.ROLE_ID AS roleId,
+        o.MENU_ID AS menuId,
+    </sql>
+
+    <sql id="joinTables">
+    </sql>
+
+    <sql id="joinColumns">
+    </sql>
+
+    <sql id="conditions">
+    </sql>
+
+    <insert id="save" parameterType="com.cust.system.domain.RoleMenuRelation">
+        INSERT INTO SYS_ROLE_MENU (
+        ROLE_ID,
+        MENU_ID
+        )
+        VALUES (
+        #{roleId},
+        #{menuId}
+        )
+    </insert>
+
+    <delete id="deleteByRoleId" parameterType="java.lang.String">
+        DELETE FROM SYS_ROLE_MENU WHERE ROLE_ID = #{roleId}
+    </delete>
+
+    <select id="findMenusIdByRoleId" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+        rm.MENU_ID as menuId
+        FROM
+        SYS_ROLE_MENU rm
+        WHERE
+        rm.ROLE_ID = #{rid}
+    </select>
+</mapper>

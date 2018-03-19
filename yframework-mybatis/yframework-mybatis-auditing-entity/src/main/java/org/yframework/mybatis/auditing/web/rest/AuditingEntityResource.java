@@ -21,7 +21,9 @@ public interface AuditingEntityResource<VO extends Object>
 
     ResponseEntity<VO> update(VO vo) throws Exception;
 
-    List<VO> getAll();
+    ResponseEntity<List<VO>> all();
+
+    ResponseEntity<List<VO>> filter(VO vo);
 
     <ID extends Serializable> ResponseEntity<VO> get(ID id) throws Exception;
 

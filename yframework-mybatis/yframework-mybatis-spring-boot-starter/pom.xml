@@ -15,12 +15,4 @@
     <properties>
         <mybatis-spring-boot.version>1.2.0</mybatis-spring-boot.version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.yframework.mybatis</groupId>
-            <artifactId>yframework-mybatis-spring-boot-autoconfigure</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
 </project>

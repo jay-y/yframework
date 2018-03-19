@@ -1,0 +1,8 @@
+id;name;sort;href;icon;permission;is_show;parent_id;activated;created_by
+1;根目录;0;;;;;null;true;system
+2;控制中心;10;home;fa fa-lg fa-fw fa-dashboard;ROLE_ADMIN;true;1;true;system
+3;系统管理;20;system;fa fa-lg fa-fw fa-desktop;ROLE_ADMIN;true;1;true;system
+310;用户管理;10;system/user;fa fa-lg fa-fw fa-user;ROLE_ADMIN;true;3;true;system
+320;角色管理;20;system/role;fa fa-lg fa-fw fa-group;ROLE_ADMIN;true;3;true;system
+330;菜单管理;30;system/menu;fa fa-lg fa-fw fa-list;ROLE_ADMIN;true;3;true;system
+340;字典管理;40;system/dict;fa fa-lg fa-fw fa-book;ROLE_ADMIN;true;3;true;system

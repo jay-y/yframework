@@ -1,0 +1,133 @@
+body.smart-style-6 #header, body.smart-style-6 .dropdown-menu > .active > a, body.smart-style-6 .dropdown-menu > .active > a:focus, body.smart-style-6 .dropdown-menu > .active > a:hover, body.smart-style-6 .dropdown-menu > li > a:focus, body.smart-style-6 .dropdown-menu > li > a:hover {
+    background-color: #33b4ff;
+}
+
+body.smart-style-6 #logo img {
+    display: block;
+}
+
+body.smart-style-6 #logo-group > span#logo:before {
+    display: none;
+}
+
+body.smart-style-6 #content {
+    margin: 0;
+    padding: 10px;
+    /*background-color: #ffffff;*/
+}
+
+body.smart-style-6 .login-info img {
+    height: 50px;
+    width: 50px;
+}
+
+body.smart-style-6 .smart-form .select select {
+    padding: 5px 10px;
+}
+
+body.smart-style-6 .login-info a {
+    margin: 6px;
+}
+
+body.smart-style-6 .login-info {
+    background: #ffffff;
+    -moz-box-shadow: 0px 2px 5px #f4f4f4;
+    -webkit-box-shadow: 0px 2px 5px #f4f4f4;
+    box-shadow: 0px 2px 5px #f4f4f4;
+}
+
+body.smart-style-6 .login-info span {
+    text-align: center;
+}
+
+body.smart-style-6 .login-info a span {
+    background-color: #ffffff;
+    color: #aaaaaa;
+    margin-top: 0px;
+}
+
+body.smart-style-6 nav li.active > a {
+    color: #33b4ff !important;
+}
+
+body.smart-style-6.minified .login-info {
+    display: none;
+}
+
+body.smart-style-6 #logo {
+    margin-top: 8px;
+    margin-left: 20px;
+}
+
+body.smart-style-6 #logo img {
+    width: 180px;
+    height: auto;
+}
+
+body.smart-style-6 header#header {
+    height: 55px;
+}
+
+body.smart-style-6 #left-panel {
+    padding-top: 55px;
+    /*border-right: 1px solid #CECECE;*/
+}
+
+/*body.smart-style-6.minified #left-panel {*/
+/*border-right: 1px solid #CECECE;*/
+/*}*/
+
+body.smart-style-6 #header > div {
+    height: 55px;
+}
+
+body.smart-style-6 .page-footer {
+    background: #ffffff;
+    border-top: 0;
+}
+
+body.smart-style-6 .txt-color-white.copyright {
+    color: #000000 !important;
+}
+
+body.smart-style-6 .table > tbody > tr > td {
+    padding: 8px;
+    font-size: 15px;
+}
+
+body.smart-style-6 .dt-toolbar {
+    padding: 10px 10px 0;
+    border-bottom: 0;
+}
+
+.table.table-bordered.dataTable {
+    border-collapse: collapse !important;
+}
+
+.table > thead > tr.cust-toolbar,
+.table > thead > tr.cust-toolbar {
+    padding: 0;
+    margin: 0;
+}
+
+.table > thead > tr.cust-toolbar > td {
+    background-color: #fafafa !important;
+}
+
+.table > thead > tr.cust-toolbar > td {
+    border: 0;
+}
+
+.table > thead:first-child > tr.cust-toolbar > td > input, select, textarea {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.select select[multiple] {
+    height: auto;
+}
+
+/*.dataTable > thead > tr:nth-child(2) {*/
+/*color: #ffffff;*/
+/*background: #33b4ff;*/
+/*}*/

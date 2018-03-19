@@ -25,11 +25,11 @@ import java.util.List;
  */
 public abstract class AbstractAuditingEntityResource<VO extends AuditingEntityDTO> implements AuditingEntityResource<VO>
 {
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    private final Class<VO> cls;
+    protected final Class<VO> cls;
 
-    private final String entityName;
+    protected final String entityName;
 
     protected AbstractAuditingEntityResource()
     {
@@ -40,10 +40,18 @@ public abstract class AbstractAuditingEntityResource<VO extends AuditingEntityDT
 
     @GetMapping
     @Override
-    public List<VO> getAll()
+    public ResponseEntity<List<VO>> all()
     {
         log.debug("REST request to get all {}", entityName);
-        return getService().findAll();
+        return ResponseEntity.ok(getService().findAll());
+    }
+
+    @GetMapping("/filter")
+    @Override
+    public ResponseEntity<List<VO>> filter(@ApiParam(required = true) VO vo)
+    {
+        log.debug("REST request to get all {} and filter according to {}", entityName, vo);
+        return ResponseEntity.ok(getService().findAll(vo));
     }
 
     @GetMapping("/{id}")

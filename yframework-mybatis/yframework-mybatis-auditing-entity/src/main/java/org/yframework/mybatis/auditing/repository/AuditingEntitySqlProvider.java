@@ -361,7 +361,7 @@ public class AuditingEntitySqlProvider<E extends AuditingEntity<ID>, ID extends 
         return val;
     }
 
-    protected String getCondition(String col, Object val, Object param)
+    protected String getCondition(String col, Object param, Object val)
     {
         return this.getCondition(col, param, val, SQLRelationOperator.EQ);
     }

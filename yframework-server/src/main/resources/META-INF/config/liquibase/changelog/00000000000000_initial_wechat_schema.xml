@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <changeSet id="00000000000000-wechat" author="jay-y">
+        <createTable tableName="wechat_component">
+            <column name="id" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="app_id" type="varchar(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="component_verify_ticket" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="activated" type="boolean" valueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="wechat_mp_account">
+            <column name="id" type="varchar(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="app_id" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nick_name" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="head_img" type="varchar(255)">
+            </column>
+            <column name="service_type_info" type="varchar(255)">
+            </column>
+            <column name="verify_type_info" type="varchar(255)">
+            </column>
+            <column name="user_name" type="varchar(255)">
+            </column>
+            <column name="principal_name" type="varchar(255)">
+            </column>
+            <column name="business_info" type="varchar(255)">
+            </column>
+            <column name="alias" type="varchar(255)">
+            </column>
+            <column name="qrcode_url" type="varchar(255)">
+            </column>
+            <column name="func_info" type="varchar(1024)">
+            </column>
+            <column name="authorization_info" type="varchar(1024)">
+            </column>
+            <column name="authorizer_info" type="varchar(1024)">
+            </column>
+            <column name="activated" type="boolean" valueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="wechat_user">
+            <column name="id" type="varchar(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="auth_type" type="varchar(100)">
+            </column>
+
+            <column name="auth_id" type="varchar(255)">
+            </column>
+
+            <column name="subscribe" type="int">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="openid" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="nickname" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="sex" type="int">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="city" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="country" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="province" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="language" type="varchar(50)"/>
+
+            <column name="headimgurl" type="varchar(255)"/>
+
+            <column name="subscribe_time" type="timestamp"/>
+
+            <column name="unionid" type="varchar(100)"/>
+
+            <column name="remark" type="varchar(100)"/>
+
+            <column name="groupid" type="varchar(50)">
+            </column>
+
+            <column name="tagid_list" type="varchar(500)">
+            </column>
+
+            <column name="sys_user_id" type="varchar(50)">
+            </column>
+
+            <column name="activated" type="boolean" valueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
