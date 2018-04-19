@@ -20,7 +20,7 @@
 | ------------- |:-------------:| ----|
 |[yframework-toolkit](yframework-toolkit)|综合工具包| -|
 |[yframework-mybatis](yframework-mybatis) |基于JPA，拓展Mybatis| 80%|
-|[yframework-system](yframework-system)|系统基础兼DEMO| 40%|
+|[yframework-server](yframework-server)|系统基础兼DEMO| 40%|
 |[代码生成](代码生成)|未来计划| -|
 |[管理前端](管理前端)|未来计划| -|
 |[应用前端](应用前端)|未来计划| -|
