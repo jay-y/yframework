@@ -5,12 +5,11 @@
 - IDEA(best)
 
 ### 技术说明
-1. 架构思想: DDD(领域驱动设计)
-2. 开发框架: Spring boot -> Spring cloud
-3. 缓存方案: redis为主(分布式缓存及会话共享)
-4. 权限框架: Spring security
-5. 程序监控: Metrics、Hystrix(服务熔断、降级等)
-6. 数据源: HikariCP
+1. 开发框架: Spring boot -> Spring cloud
+2. 缓存方案: redis为主(分布式缓存及会话共享)
+3. 权限框架: Spring security
+4. 程序监控: Metrics、Hystrix(服务熔断、降级等)
+5. 数据源: HikariCP
 6. 在线文档: Swagger
 7. ...
 
