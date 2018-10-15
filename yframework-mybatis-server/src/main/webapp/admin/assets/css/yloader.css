@@ -1,0 +1,59 @@
+#bf-yloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    filter: alpha(opacity=30);
+    -moz-opacity: 0.3;
+    -khtml-opacity: 0.3;
+    opacity: 0.3;
+}
+
+.yloader {
+    margin: 80px auto 0;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 25%;
+}
+
+.yloader * {
+    -webkit-animation: r 1.4s linear infinite;
+    animation: r 1.4s linear infinite;
+    border-radius: 50%;
+    right: 7px;
+    bottom: 7px;
+    left: 7px;
+    top: 7px;
+    box-shadow: 0 7px 0 -4px #4285F4 inset;
+}
+
+.yloader:after, .yloader * {
+    position: absolute;
+}
+
+.yloader > * > * {
+    box-shadow: 0 7px 0 -4px #DB4437 inset;
+}
+
+.yloader > * > * > * {
+    box-shadow: 0 7px 0 -4px #F4B400 inset;
+}
+
+.yloader > * > * > * > * {
+    box-shadow: 0 7px 0 -4px #0F9D58 inset;
+}
+
+@-webkit-keyframes r {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes r {
+    to {
+        transform: rotate(360deg)
+    }
+}

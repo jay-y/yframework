@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <property name="LOG_FILE"
+              value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/logs/becypress.log}"/>
+    <!--<property name="LOG_FILE_DEBUG"-->
+    <!--value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/logs/debug.log}"/>-->
+    <!--<property name="LOG_FILE_ERROR"-->
+    <!--value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/logs/error.log}"/>-->
+    <!--<property name="LOG_FILE_WARN"-->
+    <!--value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/logs/warn.log}"/>-->
+    <!--<property name="LOG_FILE_INFO"-->
+    <!--value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/logs/info.log}"/>-->
+
+    <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>${FILE_LOG_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+    <!--<appender name="FILE_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<file>${LOG_FILE_DEBUG}</file>-->
+    <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+    <!--<level>DEBUG</level>-->
+    <!--<onMatch>ACCEPT</onMatch>-->
+    <!--<onMismatch>DENY</onMismatch>-->
+    <!--</filter>-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+    <!--<fileNamePattern>${LOG_FILE_DEBUG}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+    <!--<maxFileSize>100MB</maxFileSize>-->
+    <!--<totalSizeCap>10GB</totalSizeCap>-->
+    <!--</rollingPolicy>-->
+    <!--<encoder>-->
+    <!--<Pattern>${FILE_LOG_PATTERN}</Pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--<appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<file>${LOG_FILE_ERROR}</file>-->
+    <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+    <!--<level>ERROR</level>-->
+    <!--<onMatch>ACCEPT</onMatch>-->
+    <!--<onMismatch>DENY</onMismatch>-->
+    <!--</filter>-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+    <!--<fileNamePattern>${LOG_FILE_ERROR}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+    <!--<maxFileSize>100MB</maxFileSize>-->
+    <!--<totalSizeCap>1GB</totalSizeCap>-->
+    <!--</rollingPolicy>-->
+    <!--<encoder>-->
+    <!--<Pattern>${FILE_LOG_PATTERN}</Pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--<appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<file>${LOG_FILE_WARN}</file>-->
+    <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+    <!--<level>WARN</level>-->
+    <!--<onMatch>ACCEPT</onMatch>-->
+    <!--<onMismatch>DENY</onMismatch>-->
+    <!--</filter>-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+    <!--<fileNamePattern>${LOG_FILE_WARN}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+    <!--<maxFileSize>100MB</maxFileSize>-->
+    <!--<maxHistory>30</maxHistory>-->
+    <!--<totalSizeCap>1GB</totalSizeCap>-->
+    <!--</rollingPolicy>-->
+    <!--<encoder>-->
+    <!--<Pattern>${FILE_LOG_PATTERN}</Pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--<appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<file>${LOG_FILE_INFO}</file>-->
+    <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+    <!--<level>INFO</level>-->
+    <!--<onMatch>ACCEPT</onMatch>-->
+    <!--<onMismatch>DENY</onMismatch>-->
+    <!--</filter>-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+    <!--<fileNamePattern>${LOG_FILE_INFO}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+    <!--<maxFileSize>100MB</maxFileSize>-->
+    <!--<totalSizeCap>10GB</totalSizeCap>-->
+    <!--</rollingPolicy>-->
+    <!--<encoder>-->
+    <!--<Pattern>${FILE_LOG_PATTERN}</Pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--<appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
+    <!--<queueSize>512</queueSize>-->
+    <!--<appender-ref ref="FILE_DEBUG"/>-->
+    <!--<appender-ref ref="FILE_ERROR"/>-->
+    <!--<appender-ref ref="FILE_WARN"/>-->
+    <!--<appender-ref ref="FILE_INFO"/>-->
+    <!--</appender>-->
+</included>

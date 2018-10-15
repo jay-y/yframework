@@ -1,0 +1,128 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+#
+# More information on profiles: https://jhipster.github.io/profiles/
+# More information on configuration properties: https://jhipster.github.io/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+eureka:
+    instance:
+        appname: becypress
+        instanceId: becypress:${spring.application.instance_id:${random.value}}
+        statusPageUrlPath: /apidoc/index.html
+        healthCheckUrlPath: /mgt/health
+        metadata-map:
+            profile: ${spring.profiles.active}
+            version: ${info.project.version}
+ribbon:
+    eureka:
+        enabled: true
+zuul:
+    host:
+        connect-timeout-millis: 5000
+        socket-timeout-millis: 10000
+
+# See https://github.com/Netflix/Hystrix/wiki/Configuration
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 10000
+
+management:
+    security:
+        roles: ADMIN
+    context-path: /mgt
+    health:
+        mail:
+            enabled: true # When using the MailService, configure an SMTP server and set this to true
+
+spring:
+    application:
+        name: becypress
+    profiles:
+        # The commented value for `active` can be replaced with valid Spring profiles to load.
+        # Otherwise, it will be filled in by maven when building the WAR file
+        # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
+        active: cust, becypress, dev
+        include: apidoc
+    jackson:
+        serialization.write_dates_as_timestamps: false
+    messages:
+        basename: classpath:META-INF/i18n/messages
+    mvc:
+        favicon:
+            enabled: false
+    thymeleaf:
+        prefix: classpath:META-INF/templates/
+        mode: XHTML
+    cache:
+        type: redis
+    session:
+        store-type: redis
+
+liquibase:
+    change-log: classpath:META-INF/config/liquibase/master.xml
+
+mybatis:
+    configLocation: classpath:META-INF/config/mybatis-config.xml
+    mapperLocations: classpath*:META-INF/config/mapper/*.xml
+
+security:
+    basic:
+        enabled: false
+
+server:
+    session:
+        cookie:
+            http-only: true
+
+info:
+    server:
+        name: s-yframaework-ddd
+        version: 1.0.0
+    app:
+        name: w-mui
+        version: 1.0.0
+    admin:
+        name: w-smartadmin
+        version: 1.8.6
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://jhipster.github.io/common-application-properties/
+# ===================================================================
+
+application:
+    biz:
+        package-name: org.yframework.ddd.template
+    ribbon:
+        display-on-active-profiles: dev
+    http:
+        version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
+    # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
+    cors:
+        allowed-origins: "*"
+        allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+        allowed-headers: "*"
+        exposed-headers: "X-Total-Count,Link,X-App-Alert,X-App-Params,X-App-Error"
+        allow-credentials: true
+        max-age: 1800
+    mail: # specific JHipster mail property, for standard properties see MailProperties
+        from: ysj570440569@163.com
+        base-url: http://127.0.0.1:8080

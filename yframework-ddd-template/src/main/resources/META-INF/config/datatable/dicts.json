@@ -1,0 +1,65 @@
+{
+  "id": "dicts",
+  "name": "sys_dict",
+  "description": "系统字典表",
+  "properties": [
+    {
+      "name": "id",
+      "alias": "id",
+      "type": "string",
+      "description": "唯一标识",
+      "required": true,
+      "roles": ["EQ"]
+    },
+    {
+      "name": "label",
+      "alias": "label",
+      "type": "string",
+      "description": "字典标签"
+    },
+    {
+      "name": "type",
+      "alias": "type",
+      "type": "string",
+      "description": "字典类型"
+    },
+    {
+      "name": "value",
+      "alias": "value",
+      "type": "string",
+      "description": "字典值"
+    },
+    {
+      "name": "description",
+      "alias": "description",
+      "type": "string",
+      "description": "字典说明"
+    },
+    {
+      "name": "remark",
+      "alias": "remark",
+      "type": "string",
+      "description": "字典备注"
+    },
+    {
+      "name": "created_by",
+      "alias": "createdBy",
+      "type": "string",
+      "description": "创建人"
+    },
+    {
+      "name": "created_date",
+      "alias": "createdDate",
+      "type": "date",
+      "description": "创建人"
+    },
+    {
+      "name": "activated",
+      "alias": "activated",
+      "type": "boolean",
+      "description": "唯一标识",
+      "required": true,
+      "roles": ["EQ"]
+    }
+  ]
+}

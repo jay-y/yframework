@@ -1,0 +1,48 @@
+becypress-async:
+    core-pool-size: 4
+    max-pool-size: 25
+    queue-capacity: 10000
+
+becypress-metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
+    jmx.enabled: true
+    graphite: # Use the "graphite" Maven profile to have the Graphite dependencies
+        enabled: false
+        host: localhost
+        port: 2003
+        prefix: yframework
+    prometheus: # Use the "prometheus" Maven profile to have the Prometheus dependencies
+        enabled: false
+        endpoint: /prometheusMetrics
+    logs: # Reports Dropwizard metrics in the logs
+        enabled: false
+        report-frequency: 60 # in seconds
+
+becypress-logging:
+    logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+        enabled: false
+        host: localhost
+        port: 5000
+        queue-size: 512
+    spectator-metrics: # Reports Spectator Circuit Breaker metrics in the logs
+        enabled: false
+        # edit spring.metrics.export.delay-millis to set report frequency
+
+becypress-security:
+    authentication:
+        jwt:
+            secret: my-secret-token-to-change-in-production
+            # Token is valid 24 hours
+            token-validity-in-seconds: 86400
+            token-validity-in-seconds-for-remember-me: 2592000
+
+becypress-swagger:
+    default-include-pattern: /.*
+    title: Platform APIs
+    description:
+    version: 0.0.1
+    terms-of-service-url:
+    contact-name: BC Tech Team
+    contact-url: http://www.becypress.com
+    contact-email: jay@becypress.com
+    license:
+    license-url:

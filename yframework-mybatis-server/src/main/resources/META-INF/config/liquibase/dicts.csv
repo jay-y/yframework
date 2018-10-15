@@ -1,0 +1,12 @@
+id;label;type;value;description;remark;activated;created_by
+1;所有数据;data_scope;1;数据范围;数据范围;true;system
+2;所在公司及以下数据;data_scope;2;数据范围;数据范围;true;system
+3;所在公司数据;data_scope;3;数据范围;数据范围;true;system
+4;所在部门及以下数据;data_scope;4;数据范围;数据范围;true;system
+5;所在部门数据;data_scope;5;数据范围;数据范围;true;system
+6;仅本人数据;data_scope;8;数据范围;数据范围;true;system
+7;无;office_type;0;机构类型;机构类型;true;system
+8;公司;office_type;1;机构类型;机构类型;true;system
+9;部门;office_type;2;机构类型;机构类型;true;system
+10;小组;office_type;3;机构类型;机构类型;true;system
+11;无;office_category;0;机构类别;机构类别;true;system
