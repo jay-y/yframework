@@ -5,6 +5,6 @@ package org.yframework.ddd.core.application.service;
  * Date: 2018/10/7 下午3:27<br>
  * Author: ysj
  */
-public interface ApplicationService
+public interface IApplicationService
 {
 }

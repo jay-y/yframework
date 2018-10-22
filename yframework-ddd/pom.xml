@@ -5,12 +5,12 @@
     <parent>
         <artifactId>yframework</artifactId>
         <groupId>org.yframework</groupId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>yframework-ddd</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>DDD架构(六边形/CQRS/ES)</description>

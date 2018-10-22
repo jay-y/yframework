@@ -5,7 +5,7 @@ package org.yframework.ddd.si.bus;
  * Date: 2018/9/29 下午3:03<br>
  * Author: ysj
  */
-public interface MessageBus
+public interface IMessageBus
 {
     <Event> void publish(String commandId, Event event);
 }

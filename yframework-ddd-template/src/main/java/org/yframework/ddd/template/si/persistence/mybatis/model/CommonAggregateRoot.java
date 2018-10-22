@@ -2,7 +2,7 @@ package org.yframework.ddd.template.si.persistence.mybatis.model;
 
 import org.springframework.data.annotation.Persistent;
 import org.yframework.ddd.core.domain.event.IEvent;
-import org.yframework.ddd.core.domain.model.AggregateRoot;
+import org.yframework.ddd.core.domain.model.IAggregateRoot;
 import org.yframework.toolkit.y;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import static org.yframework.ddd.template.si.persistence.mybatis.config.Aggregat
  * Date: 2018/9/29 下午6:03<br>
  * Author: ysj
  */
-public class CommonAggregateRoot extends ConcurrentHashMap implements Map, AggregateRoot<String>
+public class CommonAggregateRoot extends ConcurrentHashMap implements Map, IAggregateRoot<String>
 {
     @Persistent
     private String resourceId;
