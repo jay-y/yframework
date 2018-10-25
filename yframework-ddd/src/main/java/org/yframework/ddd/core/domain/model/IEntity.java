@@ -1,13 +1,26 @@
 package org.yframework.ddd.core.domain.model;
 
+import java.io.Serializable;
+
 /**
- * Description: DomianEntity.<br>
- * Date: 2018/10/7 下午4:02<br>
- * Author: ysj
+ * Description: 实体<br>
+ * Comments Name: IEntity<br>
+ * Date: 2018/10/16 下午1:59<br>
+ * Author: ysj<br>
+ * EditorDate: 2018/10/16 下午1:59<br>
+ * Editor: ysj
  */
-public interface IEntity<ID>
+public interface IEntity<ID> extends Serializable
 {
     ID getId();
 
     void setId(ID id);
+
+    int getVersion();
+
+    void setVersion(int version);
+
+    boolean isActivated();
+
+    void setActivated(boolean activated);
 }
