@@ -22,5 +22,7 @@ public interface IEntity<ID> extends Serializable
 
     boolean isActivated();
 
+    boolean getActivated();
+
     void setActivated(boolean activated);
 }
