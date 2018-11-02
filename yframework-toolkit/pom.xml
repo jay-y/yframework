@@ -5,12 +5,13 @@
     <parent>
         <artifactId>yframework</artifactId>
         <groupId>org.yframework</groupId>
-        <version>2.0.1</version>
+        <version>2.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>yframework-toolkit</artifactId>
     <packaging>jar</packaging>
+    <version>2.1.0</version>
 
     <properties>
         <commons-codec.version>1.10</commons-codec.version>

@@ -1,7 +1,9 @@
 package org.yframework.ddd.core.domain.model;
 
+import org.yframework.ddd.core.domain.event.IEvent;
+
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 /**
  * Description: 聚合根<br>
@@ -11,25 +13,11 @@ import java.util.Date;
  * EditorDate: 2018/10/16 下午1:59<br>
  * Editor: ysj
  */
-public interface IAggregateRoot<ID> extends IEntity<ID>, Serializable
+public interface IAggregateRoot<ID extends Serializable> extends IEntity<ID>
 {
-    ID getId();
+    <Event extends IEvent> Event registerEvent(Event event);
 
-    void setId(ID id);
+    List<Object> getEvents();
 
-    String getCreatedBy();
-
-    void setCreatedBy(String createdBy);
-
-    Date getCreatedDate();
-
-    void setCreatedDate(Date createdDate);
-
-    String getLastModifiedBy();
-
-    void setLastModifiedBy(String lastModifiedBy);
-
-    Date getLastModifiedDate();
-
-    void setLastModifiedDate(Date lastModifiedDate);
+    void clearEvents();
 }

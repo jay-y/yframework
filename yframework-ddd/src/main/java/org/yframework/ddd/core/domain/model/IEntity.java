@@ -10,19 +10,6 @@ import java.io.Serializable;
  * EditorDate: 2018/10/16 下午1:59<br>
  * Editor: ysj
  */
-public interface IEntity<ID> extends Serializable
+public interface IEntity<ID extends Serializable> extends Persistable<ID>
 {
-    ID getId();
-
-    void setId(ID id);
-
-    int getVersion();
-
-    void setVersion(int version);
-
-    boolean isActivated();
-
-    boolean getActivated();
-
-    void setActivated(boolean activated);
 }
