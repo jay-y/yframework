@@ -11,19 +11,19 @@ import java.util.Date;
  * EditorDate: 2018/11/2 下午3:23<br>
  * Editor: ysj
  */
-public interface Auditable<T, ID extends Serializable> extends Persistable<ID>
+public interface Auditable<U, ID extends Serializable> extends Persistable<ID>
 {
-    T getCreatedBy();
+    U getCreatedBy();
 
-    void setCreatedBy(T var1);
+    void setCreatedBy(U var1);
 
     Date getCreatedDate();
 
     void setCreatedDate(Date var1);
 
-    T getLastModifiedBy();
+    U getLastModifiedBy();
 
-    void setLastModifiedBy(T var1);
+    void setLastModifiedBy(U var1);
 
     Date getLastModifiedDate();
 

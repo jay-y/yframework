@@ -3,21 +3,24 @@ package org.yframework.ddd.core.domain.repository;
 import java.util.List;
 
 /**
- * Description: 仓储.<br>
- * Date: 2018/10/13 下午8:22<br>
- * Author: ysj
+ * Description: 仓储<br>
+ * Comments Name: IEntity<br>
+ * Date: 2018/10/16 下午1:59<br>
+ * Author: ysj<br>
+ * EditorDate: 2018/10/16 下午1:59<br>
+ * Editor: ysj
  */
-public interface IRepository<T, ID>
+public interface IRepository<T>
 {
-    List<T> list();
+    List<T> list(Object o);
 
     int size();
 
-    T get(ID id);
+    T get(Object o);
 
     boolean add(T t);
 
-    boolean remove(T o);
+    boolean remove(Object o);
 
     void clear();
 }
