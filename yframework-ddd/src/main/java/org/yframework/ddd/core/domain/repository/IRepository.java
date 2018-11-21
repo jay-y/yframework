@@ -18,9 +18,9 @@ public interface IRepository<T>
 
     T get(Object o);
 
-    boolean add(T t);
+    int add(T t);
 
-    boolean remove(Object o);
+    int remove(Object o);
 
     void clear();
 }
