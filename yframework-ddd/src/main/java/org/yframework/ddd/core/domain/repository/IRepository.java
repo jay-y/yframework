@@ -14,7 +14,7 @@ public interface IRepository<T>
 {
     List<T> list(Object o);
 
-    int size();
+    int size(Object o);
 
     T get(Object o);
 
@@ -22,5 +22,5 @@ public interface IRepository<T>
 
     int remove(Object o);
 
-    void clear();
+    void clear(Object o);
 }

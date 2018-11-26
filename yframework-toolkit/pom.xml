@@ -13,6 +13,9 @@
     <packaging>jar</packaging>
     <version>2.1.0</version>
 
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>工具</description>
+
     <properties>
         <commons-codec.version>1.10</commons-codec.version>
         <commons-net.version>3.6</commons-net.version>
