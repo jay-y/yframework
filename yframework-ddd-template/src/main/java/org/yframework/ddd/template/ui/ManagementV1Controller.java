@@ -3,7 +3,7 @@ package org.yframework.ddd.template.ui;
 import org.springframework.web.bind.annotation.*;
 import org.yframework.ddd.template.core.application.service.ManagementApplicationService;
 import org.yframework.ddd.template.core.domain.model.Management;
-import org.yframework.ddd.ui.IController;
+import org.yframework.ddd.common.ui.IController;
 import org.yframework.toolkit.StringUtil;
 
 import java.util.Map;

@@ -1,8 +1,8 @@
 package org.yframework.ddd.template.si.persistence.mybatis.model;
 
 import org.springframework.data.annotation.Persistent;
-import org.yframework.ddd.core.domain.event.IEvent;
-import org.yframework.ddd.core.domain.model.IAggregateRoot;
+import org.yframework.ddd.common.domain.event.IEvent;
+import org.yframework.ddd.common.domain.support.IAggregateRoot;
 import org.yframework.toolkit.y;
 
 import java.util.List;

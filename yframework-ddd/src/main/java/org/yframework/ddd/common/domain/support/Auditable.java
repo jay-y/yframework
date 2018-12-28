@@ -1,4 +1,4 @@
-package org.yframework.ddd.core.domain.model;
+package org.yframework.ddd.common.domain.support;
 
 import java.io.Serializable;
 import java.util.Date;

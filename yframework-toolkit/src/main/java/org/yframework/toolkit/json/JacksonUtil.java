@@ -26,28 +26,19 @@ public enum JacksonUtil implements JsonUtil
     JacksonUtil()
     {
         objectMapper = new ObjectMapper().
-            registerModule(new ParameterNamesModule()).
-            registerModule(new Jdk8Module()).
-            registerModule(new JavaTimeModule());
-        //设置null值不参与序列化(字段不被显示)
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-        // 对于空的对象转json的时候不抛出错误
-        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-        // 禁用序列化日期为timestamps
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        // 禁用遇到未知属性抛出异常
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        // 视空字符传为null
-        objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-        // 低层级配置
-        objectMapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
-        // 允许属性名称没有引号
-        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
-        // 支持解析单引号
-        objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
-        // 支持解析结束符
-        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
-        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+                registerModule(new ParameterNamesModule()).
+                registerModule(new Jdk8Module()).
+                registerModule(new JavaTimeModule()).
+                configure(JsonParser.Feature.ALLOW_COMMENTS, true). // 低层级配置
+                configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true). // 允许属性名称没有引号
+                configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true). // 支持解析单引号
+                configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true). // 支持解析结束符
+                disable(SerializationFeature.FAIL_ON_EMPTY_BEANS). // 对于空的对象转json的时候不抛出错误
+                disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS). // 禁用序列化日期为timestamps
+                disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES). // 禁用遇到未知属性抛出异常
+                enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT). // 视空字符传为null
+                setSerializationInclusion(JsonInclude.Include.NON_EMPTY). //设置null值不参与序列化(字段不被显示)
+                setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
     }
 
     public ObjectMapper get()

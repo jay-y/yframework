@@ -1,6 +1,6 @@
 package org.yframework.ddd.template.si.persistence.mybatis.model;
 
-import org.yframework.ddd.core.domain.model.IEntity;
+import org.yframework.ddd.common.domain.support.IEntity;
 
 import javax.persistence.Entity;
 import java.util.concurrent.ConcurrentHashMap;

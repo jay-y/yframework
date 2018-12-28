@@ -5,7 +5,7 @@
 
     <groupId>org.yframework</groupId>
     <artifactId>yframework</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.0</version>
     <modules>
         <module>yframework-toolkit</module>
         <module>yframework-ddd</module>
@@ -14,7 +14,7 @@
     </modules>
     <packaging>pom</packaging>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${artifactId}</name>
     <url>https://jay-y.github.io/</url>
     <inceptionYear>2018-9999</inceptionYear>
     <description>Jay-Y's framework</description>

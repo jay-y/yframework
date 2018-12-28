@@ -1,4 +1,4 @@
-package org.yframework.ddd.core.application.service;
+package org.yframework.ddd.common.domain;
 
 /**
  * Description: 应用服务.<br>
