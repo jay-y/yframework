@@ -1,5 +1,7 @@
 package org.yframework.ddd.common.domain;
 
+import java.io.Serializable;
+
 /**
  * Description: 领域对象<br>
  * Comments Name: IDomainObject<br>
@@ -8,7 +10,6 @@ package org.yframework.ddd.common.domain;
  * EditorDate: 2018/11/2 下午3:23<br>
  * Editor: ysj
  */
-public interface IDomainObject<R extends IPersistentObject>
+public interface IDomainObject extends Serializable
 {
-    IDomainObject with(R root);
 }

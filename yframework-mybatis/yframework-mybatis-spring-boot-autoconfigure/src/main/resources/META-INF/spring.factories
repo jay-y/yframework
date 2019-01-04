@@ -1,3 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.yframework.mybatis.spring.boot.autoconfigure.YMybatisAutoConfiguration

@@ -10,9 +10,9 @@ package org.yframework.ddd.common.domain.support;
  */
 public interface Suppressible
 {
-    boolean isDeleted();
+    Boolean isDeleted();
 
-    boolean getDeleted();
+    Boolean getDeleted();
 
-    void setDeleted(boolean deleted);
+    void setDeleted(Boolean deleted);
 }

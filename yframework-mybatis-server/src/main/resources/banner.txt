@@ -1,2 +1,0 @@
-${AnsiColor.BRIGHT_BLUE}:: 中国银行 http://www.boc.cn ::
-:: Running Spring Boot ${spring-boot.version} ::

@@ -9,8 +9,6 @@
     <modules>
         <module>yframework-toolkit</module>
         <module>yframework-ddd</module>
-        <!--<module>yframework-ddd-template</module>-->
-        <!--<module>yframework-mybatis</module>-->
     </modules>
     <packaging>pom</packaging>
 
@@ -21,24 +19,60 @@
 
     <!-- 项目属性 -->
     <properties>
-        <!-- environment -->
-        <java.version>1.8</java.version>
-        <maven.compiler.source.version>${java.version}</maven.compiler.source.version>
-        <maven.compiler.target.version>${java.version}</maven.compiler.target.version>
-        <maven.compiler.compilerVersion.version>${java.version}</maven.compiler.compilerVersion.version>
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-        <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
-        <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
-        <maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
-        <m2e.apt.activation.version>jdt_apt</m2e.apt.activation.version>
-        <mapstruct.version>1.1.0.Final</mapstruct.version>
+        <root.basedir>${basedir}</root.basedir>
 
-        <!-- frameworks -->
-        <spring.version>4.3.5.RELEASE</spring.version>
-        <spring-boot.version>1.5.6.RELEASE</spring-boot.version>
-        <!-- commons -->
+        <!-- Dependency versions -->
         <slf4j.version>1.7.25</slf4j.version>
+
+        <spring.version>4.3.20.RELEASE</spring.version>
+        <spring-boot.version>1.5.17.RELEASE</spring-boot.version>
+        <spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
+        <spring-loaded.version>1.2.8.RELEASE</spring-loaded.version>
+        <springfox.version>2.6.1</springfox.version>
+
+        <!-- Plugin versions -->
+        <lombok-maven-plugin.version>1.18.2.0</lombok-maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
+
+        <!-- Environment -->
+        <java.version>1.8</java.version>
+        <mapstruct-jdk8.version>1.1.0.Final</mapstruct-jdk8.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.repository.releaseUrl>http://maven.becypress.com/repository/maven-releases/
+        </project.repository.releaseUrl>
+        <project.repository.snapshotUrl>http://maven.becypress.com/repository/maven-snapshots/
+        </project.repository.snapshotUrl>
     </properties>
+
+    <developers>
+        <developer>
+            <id>Jay-Y</id>
+            <name>Shijie Yan</name>
+            <email>570440569@qq.com</email>
+            <url>https://jay-y.github.io/</url>
+            <roles>
+                <role>Owner</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Release Repository</name>
+            <url>${project.repository.releaseUrl}</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshot Repository</name>
+            <url>${project.repository.snapshotUrl}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -51,13 +85,12 @@
 
     <!-- 设定主仓库，按设定顺序进行查找。 -->
     <repositories>
-
-        <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
+        <!-- Nexus私服 -->
         <repository>
-            <id>nexus-repos</id>
-            <name>Team Nexus Repository</name>
-            <url>http://192.168.11.36:8888/nexus/content/groups/public</url>
-        </repository> -->
+            <id>becypress-repos</id>
+            <name>Becypress Nexus Repository</name>
+            <url>http://maven.becypress.com/content/groups/public</url>
+        </repository>
 
         <repository>
             <id>aliyun-repos</id>
@@ -128,13 +161,13 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>${maven.compiler.source.version}</source>
-                    <target>${maven.compiler.target.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct.version}</version>
+                            <version>${mapstruct-jdk8.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
@@ -150,25 +183,10 @@
                 <jdk>${java.version}</jdk>
             </activation>
             <properties>
-                <maven.compiler.source>${maven.compiler.source.version}</maven.compiler.source>
-                <maven.compiler.target>${maven.compiler.target.version}</maven.compiler.target>
-                <maven.compiler.compilerVersion>${maven.compiler.compilerVersion.version}
-                </maven.compiler.compilerVersion>
+                <maven.compiler.source>${java.version}</maven.compiler.source>
+                <maven.compiler.target>${java.version}</maven.compiler.target>
+                <maven.compiler.compilerVersion>${java.version}</maven.compiler.compilerVersion>
             </properties>
         </profile>
     </profiles>
-
-    <developers>
-        <developer>
-            <id>Jay-Y</id>
-            <name>Shijie Yan</name>
-            <email>570440569@qq.com</email>
-            <url>https://jay-y.github.io/</url>
-            <roles>
-                <role>Owner</role>
-            </roles>
-            <timezone>+8</timezone>
-        </developer>
-    </developers>
-
 </project>

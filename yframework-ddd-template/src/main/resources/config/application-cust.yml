@@ -1,3 +1,0 @@
-datatable:
-    location: META-INF/config/datatable/{filename}.json
-    charset: UTF-8

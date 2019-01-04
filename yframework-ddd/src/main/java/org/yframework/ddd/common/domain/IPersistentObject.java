@@ -13,6 +13,6 @@ import java.io.Serializable;
  * EditorDate: 2018/10/16 下午1:59<br>
  * Editor: ysj
  */
-public interface IPersistentObject<U extends Serializable, ID extends Serializable> extends Auditable<U, ID>, Persistable<ID>
+public interface IPersistentObject<U extends Serializable, ID extends Serializable> extends Auditable<U, ID>, Persistable<ID>, Serializable
 {
 }
