@@ -12,7 +12,5 @@ public interface Suppressible
 {
     Boolean isDeleted();
 
-    Boolean getDeleted();
-
     void setDeleted(Boolean deleted);
 }

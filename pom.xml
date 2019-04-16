@@ -85,7 +85,6 @@
 
     <!-- 设定主仓库，按设定顺序进行查找。 -->
     <repositories>
-        <!-- Nexus私服 -->
         <repository>
             <id>becypress-repos</id>
             <name>Becypress Nexus Repository</name>
@@ -132,13 +131,6 @@
 
     <!-- 设定插件仓库 -->
     <pluginRepositories>
-
-        <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
-        <pluginRepository>
-            <id>nexus-repos</id>
-            <name>Team Nexus Repository</name>
-            <url>http://192.168.11.36:8888/nexus/content/groups/public/</url>
-        </pluginRepository> -->
 
         <pluginRepository>
             <id>aliyun-repos</id>
