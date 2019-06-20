@@ -192,7 +192,7 @@ public class StringUtil extends StringUtils
         {
             return "";
         }
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         int n = 0;
         char temp;
         boolean isCode = false; // 是不是HTML代码
@@ -346,10 +346,6 @@ public class StringUtil extends StringUtils
         if (ip == null || ip.length() == 0 || "X-Real-IP".equalsIgnoreCase(ip))
         {
             ip = request.getHeader("X-Real-IP");
-        }
-        if (ip.contains(","))
-        {
-            return ip.split(",")[0];
         }
         return ip;
     }
