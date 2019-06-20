@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class StringUtil extends StringUtils
 {
     private static final char _SEPARATOR = '_';
     private static final String _ENCODING = "UTF-8";
-    private static StringUtil instance = null;
+    private static StringUtil instance;
 
     static
     {
@@ -309,26 +311,53 @@ public class StringUtil extends StringUtils
      */
     public String getRemoteAddr(HttpServletRequest request)
     {
-        String remoteAddr = request.getHeader("X-Real-IP");
-        if (isNotBlank(remoteAddr))
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
         {
-            remoteAddr = request.getHeader("X-Forwarded-For");
+            ip = request.getHeader("Proxy-Client-IP");
         }
-        else if (isNotBlank(remoteAddr))
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
         {
-            remoteAddr = request.getHeader("Proxy-Client-IP");
+            ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        else if (isNotBlank(remoteAddr))
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
         {
-            remoteAddr = request.getHeader("WL-Proxy-Client-IP");
+            ip = request.getHeader("HTTP_CLIENT_IP");
         }
-        return remoteAddr != null ? remoteAddr : request.getRemoteAddr();
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
+        {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip))
+        {
+            ip = request.getRemoteAddr();
+        }
+        if (ip != null && ip.equalsIgnoreCase("0:0:0:0:0:0:0:1"))
+        {
+            try
+            {
+                ip = InetAddress.getLocalHost().getHostAddress();
+            }
+            catch (UnknownHostException ignored)
+            {
+                ip = "0.0.0.0";
+            }
+        }
+        if (ip == null || ip.length() == 0 || "X-Real-IP".equalsIgnoreCase(ip))
+        {
+            ip = request.getHeader("X-Real-IP");
+        }
+        if (ip.contains(","))
+        {
+            return ip.split(",")[0];
+        }
+        return ip;
     }
 
     /**
      * 驼峰命名法工具
      *
-     * @return toCamelCase("hello_world") == "helloWorld"
+     * @return toCamelCase(" hello_world ") == "helloWorld"
      * toCapitalizeCamelCase("hello_world") == "HelloWorld"
      * toUnderScoreCase("helloWorld") = "hello_world"
      */
@@ -368,7 +397,7 @@ public class StringUtil extends StringUtils
     /**
      * 驼峰命名法工具
      *
-     * @return toCamelCase("hello_world") == "helloWorld"
+     * @return toCamelCase(" hello_world ") == "helloWorld"
      * toCapitalizeCamelCase("hello_world") == "HelloWorld"
      * toUnderScoreCase("helloWorld") = "hello_world"
      */
@@ -385,7 +414,7 @@ public class StringUtil extends StringUtils
     /**
      * 驼峰命名法工具
      *
-     * @return toCamelCase("hello_world") == "helloWorld"
+     * @return toCamelCase(" hello_world ") == "helloWorld"
      * toCapitalizeCamelCase("hello_world") == "HelloWorld"
      * toUnderScoreCase("helloWorld") = "hello_world"
      */
@@ -473,11 +502,7 @@ public class StringUtil extends StringUtils
      */
     public boolean isZh(char ch)
     {
-        if ((ch >= '\u4e00' && ch <= '\u9fa5') || (ch >= '\uf900' && ch <= '\ufa2d'))
-        {
-            return true;
-        }
-        return false;
+        return (ch >= '\u4e00' && ch <= '\u9fa5') || (ch >= '\uf900' && ch <= '\ufa2d');
     }
 
     /**
@@ -490,7 +515,7 @@ public class StringUtil extends StringUtils
      */
     public boolean existsZh(String str)
     {
-        return str == null ? false : str.getBytes(CharsetEnum.UTF_8.getCharset()).length > str.length();
+        return str != null && str.getBytes(CharsetEnum.UTF_8.getCharset()).length > str.length();
     }
 
     /**
@@ -873,10 +898,6 @@ public class StringUtil extends StringUtils
      */
     public boolean isNumber(String str, int len)
     {
-        if (!str.matches("\\d{" + len + "}"))
-        {
-            return false;
-        }
-        return true;
+        return str.matches("\\d{" + len + "}");
     }
 }
