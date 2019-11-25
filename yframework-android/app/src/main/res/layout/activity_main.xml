@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="view.MainActivity">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/am_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <io.fotoapparat.facedetector.view.CameraOverlayLayout
+            android:id="@+id/am_camera_overlay_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <io.fotoapparat.view.CameraView
+                android:id="@+id/am_camera_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <io.fotoapparat.facedetector.view.RectanglesView
+                android:id="@+id/am_rectangles_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:rectanglesColor="@color/colorAccent"
+                app:rectanglesStrokeWidth="2dp" />
+
+        </io.fotoapparat.facedetector.view.CameraOverlayLayout>
+
+        <ImageView
+            android:id="@+id/am_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:visibility="gone"/>
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/lyt_sign_window"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:background="@drawable/bg_access_control_vertical"-->
+        <!--            android:gravity="center_horizontal"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:visibility="visible">-->
+
+        <!--            <RelativeLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:background="@drawable/vertical_light"-->
+        <!--                android:gravity="center_horizontal">-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="200dp"-->
+        <!--                    android:background="@drawable/vertical_circle"-->
+        <!--                    android:orientation="vertical">-->
+
+        <!--                    <com.becypress.afr.view.component.CircleImageView-->
+        <!--                        android:id="@+id/am_image_view"-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:contentDescription="@null"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:scaleType="fitXY"-->
+        <!--                        android:src="@drawable/me" />-->
+
+        <!--                </LinearLayout>-->
+        <!--            </RelativeLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/lyt_pass_success"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="0dp"-->
+        <!--                android:layout_gravity="center_horizontal"-->
+        <!--                android:gravity="center_horizontal"-->
+        <!--                android:orientation="horizontal"-->
+        <!--                app:layout_heightPercent="15%w"-->
+        <!--                app:layout_marginTopPercent="5%"-->
+        <!--                app:layout_widthPercent="100%">-->
+
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/pass_window_flag"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:background="@drawable/pass_success_white"-->
+        <!--                    android:gravity="end"-->
+        <!--                    android:scaleType="fitXY" />-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/pass_window_name"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="0dp"-->
+        <!--                    android:gravity="start"-->
+        <!--                    android:text="验证通过"-->
+        <!--                    android:textColor="#FFFFFFFF" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/lyt_sign_name"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="0dp"-->
+        <!--                android:layout_gravity="center_horizontal"-->
+        <!--                android:gravity="center_horizontal"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_name_label"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="0dp"-->
+        <!--                    android:gravity="end"-->
+        <!--                    android:text="姓名"-->
+        <!--                    android:textColor="#FFFFFFFF" />-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_name"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="0dp"-->
+        <!--                    android:gravity="start"-->
+        <!--                    android:textColor="#FFFFFFFF" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/lyt_sign_time"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="0dp"-->
+        <!--                android:layout_gravity="center_horizontal"-->
+        <!--                android:gravity="center_horizontal"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_sign_time_label"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="0dp"-->
+        <!--                    android:gravity="end"-->
+        <!--                    android:text="验证时间"-->
+        <!--                    android:textColor="#FFFFFFFF" />-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_sign_time"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="0dp"-->
+        <!--                    android:gravity="start"-->
+        <!--                    android:textColor="#FFFFFFFF" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="0dp"-->
+        <!--                android:layout_gravity="center_horizontal"-->
+        <!--                android:gravity="center_horizontal"-->
+        <!--                android:orientation="horizontal"-->
+        <!--                app:layout_heightPercent="10%w"-->
+        <!--                app:layout_widthPercent="80%">-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_sign_address_label"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="0dp"-->
+        <!--                    android:gravity="end"-->
+        <!--                    android:text="验证地址"-->
+        <!--                    android:textColor="#FFFFFFFF" />-->
+
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_sign_address"-->
+        <!--                    android:layout_width="0dp"-->
+        <!--                    android:layout_height="0dp"-->
+        <!--                    android:ellipsize="end"-->
+        <!--                    android:gravity="start"-->
+        <!--                    android:singleLine="true"-->
+        <!--                    android:textColor="#FFFFFFFF" />-->
+        <!--            </LinearLayout>-->
+        <!--        </LinearLayout>-->
+    </RelativeLayout>
+</layout>

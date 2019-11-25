@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="view.DebugActivity">
+
+    <data>
+        <variable
+                name="presenter"
+                type="org.yframework.android.view.Presenter"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/ad_image_view"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:contentDescription="@null"/>
+
+        </LinearLayout>
+        <Button
+                android:id="@+id/ad_action_add_personnel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:text="@string/action_add_personnel"
+                android:onClick="@{(v)->presenter.onClick(v)}"
+        />
+
+        <Button
+                android:id="@+id/ad_action_get_personnel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:text="@string/action_get_personnel"
+                android:onClick="@{(v)->presenter.onClick(v)}"
+        />
+
+        <Button
+                android:id="@+id/ad_action_remove_personnel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:text="@string/action_remove_personnel"
+                android:onClick="@{(v)->presenter.onClick(v)}"
+        />
+
+        <Button
+            android:id="@+id/ad_action_to_main_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:text="@string/action_to_main_activity"
+            android:onClick="@{(v)->presenter.onClick(v)}"
+            />
+    </LinearLayout>
+</layout>
