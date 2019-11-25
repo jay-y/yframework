@@ -76,19 +76,3 @@ dependencies {
     implementation rootProject.ext.dependencies["flexbox"]
     implementation rootProject.ext.dependencies["franmontiel-persistent-cookie-jar"]
 }
-
-uploadArchives {
-    repositories.mavenDeployer {
-        repository(url: "http://maven.becypress.com/repository/maven-releases/") {
-            authentication(userName: "admin", password: "nexus2019")
-        }
-
-        pom.project {
-            groupId "org.yframework.android"
-            artifactId "framework"
-            version "1.0.0"
-            packaging 'aar'
-            description '基础框架'
-        }
-    }
-}
