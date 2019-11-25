@@ -10,7 +10,7 @@
 
 | 模块       | 说明          |   进度 |
 | ------------- |:-------------:| ----|
-|[yframework-android](yframework-android) |Android基础框架模块| -|
+|[yframework-android](yframework-android) |Android基础框架| -|
 |[yframework-ddd](yframework-ddd) |DDD架构顶层抽象设计| -|
 |[yframework-toolkit](yframework-toolkit)|综合工具包| -|
 
