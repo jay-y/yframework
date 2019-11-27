@@ -21,7 +21,6 @@ class BasicNetProvider(private val context: Context) :
     }
 
     override fun configHttps(builder: OkHttpClient.Builder) {
-
     }
 
     override fun configCookie(): CookieJar? =
@@ -57,20 +56,18 @@ class BasicNetProvider(private val context: Context) :
         @Throws(IOException::class)
         override fun onAfterRequest(response: Response, chain: Interceptor.Chain): Response {
             var ex: RemoteException? = null
-            if (401 == response.code()) {
-                throw RemoteException("登录已过期,请重新登录")
-            } else if (403 == response.code()) {
-                ex = RemoteException("禁止访问")
-            } else if (404 == response.code()) {
-                ex = RemoteException("链接错误")
-            } else if (503 == response.code()) {
-                ex = RemoteException("服务器升级中...")
-            } else if (response.code() > 300) {
-                val message = response.body()!!.string()
-                ex = if (message.isNullOrEmpty()) {
-                    RemoteException("服务器内部错误")
-                } else {
-                    RemoteException(message)
+            when {
+                401 == response.code() -> throw RemoteException("登录已过期,请重新登录")
+                403 == response.code() -> ex = RemoteException("禁止访问")
+                404 == response.code() -> ex = RemoteException("链接错误")
+                503 == response.code() -> ex = RemoteException("服务器升级中...")
+                response.code() > 300 -> {
+                    val message = response.body()!!.string()
+                    ex = if (message.isNullOrEmpty()) {
+                        RemoteException("服务器内部错误")
+                    } else {
+                        RemoteException(message)
+                    }
                 }
             }
             if (ex != null) {

@@ -22,8 +22,8 @@ object NetManager {
     private val retrofitMap = HashMap<String, Retrofit>()
     private val clientMap = HashMap<String, OkHttpClient>()
 
-    operator fun <S> get(baseURL: String, service: Class<S>): S {
-        return getRetrofit(baseURL).create(service)
+    operator fun <S> get(baseURL: String, service: Class<S>, provider: NetProvider? = null): S {
+        return getRetrofit(baseURL, provider).create(service)
     }
 
     @JvmOverloads
@@ -72,7 +72,7 @@ object NetManager {
     }
 
     fun registerProvider(baseURL: String, provider: NetProvider) {
-        providerMap.put(baseURL, provider)
+        providerMap[baseURL] = provider
     }
 
     fun clearCache() {
