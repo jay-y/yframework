@@ -1,6 +1,7 @@
 package org.yframework.toolkit.fixed;
 
 import org.yframework.toolkit.FixedUtil;
+import org.yframework.toolkit.ReflectionUtil;
 import org.yframework.toolkit.fixed.annotation.FixedStringProperty;
 import org.yframework.toolkit.y;
 
@@ -32,7 +33,7 @@ public enum FixedStringUtil implements FixedUtil
                     forEach(field ->
                     {
                         FixedStringProperty p = field.getAnnotation(FixedStringProperty.class);
-                        String value = (String) y.util().reflection().getFieldValue(object, field.getName());
+                        String value = (String) ReflectionUtil.INSTANCE.getFieldValue(object, field.getName());
                         boolean isTrimLeft = false;
                         switch (p.align())
                         {
@@ -69,7 +70,7 @@ public enum FixedStringUtil implements FixedUtil
                     {
                         FixedStringProperty p = field.getAnnotation(FixedStringProperty.class);
                         String s = y.util().string().substring(content, charset, p.index(), p.length()).trim();
-                        y.util().reflection().setFieldValue(object, field.getName(), s);
+                        ReflectionUtil.INSTANCE.setFieldValue(object, field.getName(), s);
                     });
             return object;
         }
@@ -94,7 +95,7 @@ public enum FixedStringUtil implements FixedUtil
                     {
                         FixedStringProperty p = field.getAnnotation(FixedStringProperty.class);
                         String s = y.util().string().substring(content, charset, p.index(), p.length()).trim();
-                        y.util().reflection().setFieldValue(t, field.getName(), s);
+                        ReflectionUtil.INSTANCE.setFieldValue(t, field.getName(), s);
                     });
             return t;
         }

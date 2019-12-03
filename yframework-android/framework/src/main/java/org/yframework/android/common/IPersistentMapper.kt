@@ -1,33 +1,56 @@
 package org.yframework.android.common
 
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Update
+
+
 /**
  * Description: IPersistentMapper<br>
  * Comments Name: IPersistentMapper<br>
- * Date: 2019-08-23 10:58<br>
+ * Date: 2019-08-21 09:11<br>
  * Author: ysj<br>
- * EditorDate: 2019-08-23 10:58<br>
+ * EditorDate: 2019-08-21 09:11<br>
  * Editor: ysj
  */
-interface IPersistentMapper<T> {
-    fun deleteByPrimaryKey(o: Any): Int
+interface IPersistentMapper<T> : org.yframework.ddd.common.domain.IPersistentMapper<T> {
 
-    fun delete(t: T): Int
+    @Delete
+    override fun deleteByPrimaryKey(o: Any): Int
 
-    fun insert(t: T): Int
+    @Delete
+    override fun delete(t: T): Int
 
-    fun insertSelective(t: T): Int
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    override fun insert(t: T): Int
 
-    fun selectAll(): List<T>
+    @Insert
+    override fun insertSelective(t: T): Int
 
-    fun selectByPrimaryKey(o: Any): T
+    override fun selectAll(): List<T> {
+        throw RuntimeException("Stub!")
+    }
 
-    fun selectCount(t: T): Int
+    override fun selectByPrimaryKey(o: Any): T {
+        throw RuntimeException("Stub!")
+    }
 
-    fun select(t: T): List<T>
+    override fun selectCount(t: T): Int {
+        throw RuntimeException("Stub!")
+    }
 
-    fun selectOne(t: T): T
+    override fun select(t: T): List<T> {
+        throw RuntimeException("Stub!")
+    }
 
-    fun updateByPrimaryKey(t: T): Int
+    override fun selectOne(t: T): T {
+        throw RuntimeException("Stub!")
+    }
 
-    fun updateByPrimaryKeySelective(t: T): Int
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    override fun updateByPrimaryKey(t: T): Int
+
+    @Update
+    override fun updateByPrimaryKeySelective(t: T): Int
 }

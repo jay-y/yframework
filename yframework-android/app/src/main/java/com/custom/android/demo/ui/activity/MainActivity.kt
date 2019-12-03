@@ -1,4 +1,4 @@
-package com.custom.android.demo.view
+package com.custom.android.demo.ui.activity
 
 import android.os.Bundle
 import com.custom.android.demo.R

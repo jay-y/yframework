@@ -1,4 +1,4 @@
-package com.custom.android.demo.view.component
+package com.custom.android.demo.ui.component
 
 import android.annotation.SuppressLint
 import android.content.Context

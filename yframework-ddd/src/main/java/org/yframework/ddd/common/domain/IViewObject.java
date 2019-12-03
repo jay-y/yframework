@@ -1,7 +1,5 @@
 package org.yframework.ddd.common.domain;
 
-import java.io.Serializable;
-
 /**
  * Description: 视图对象<br>
  * Comments Name: IViewObject<br>
@@ -10,6 +8,6 @@ import java.io.Serializable;
  * EditorDate: 2018/12/28 19:43<br>
  * Editor: ysj
  */
-public interface IViewObject extends Serializable
+public interface IViewObject extends IDomainObject
 {
 }

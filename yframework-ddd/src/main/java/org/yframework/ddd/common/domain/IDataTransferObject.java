@@ -1,7 +1,5 @@
 package org.yframework.ddd.common.domain;
 
-import java.io.Serializable;
-
 /**
  * Description: 数据传输对象<br>
  * Comments Name: IDataTransferObject<br>
@@ -10,6 +8,6 @@ import java.io.Serializable;
  * EditorDate: 2018/12/28 18:45<br>
  * Editor: ysj
  */
-public interface IDataTransferObject extends Serializable
+public interface IDataTransferObject extends IDomainObject
 {
 }

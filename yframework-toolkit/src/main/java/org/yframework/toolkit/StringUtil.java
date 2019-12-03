@@ -133,21 +133,6 @@ public class StringUtil extends StringUtils
     }
 
     /**
-     * 替换为手机识别的HTML，去掉样式及属性，保留回车。
-     *
-     * @param txt
-     * @return
-     */
-    public String toHtml(String txt)
-    {
-        if (txt == null)
-        {
-            return "";
-        }
-        return replace(replace(y.util().codogram().escapeHtml(txt), "\n", "<br/>"), "\t", "&nbsp; &nbsp; ");
-    }
-
-    /**
      * 缩略字符串（不区分中英文字符）
      *
      * @param str    目标字符串
@@ -499,19 +484,6 @@ public class StringUtil extends StringUtils
     public boolean isZh(char ch)
     {
         return (ch >= '\u4e00' && ch <= '\u9fa5') || (ch >= '\uf900' && ch <= '\ufa2d');
-    }
-
-    /**
-     * 判定字符串中是否存在中文
-     * eg: StringUtil.existsZh("123你");
-     * ==>true
-     *
-     * @param str
-     * @returns {boolean}
-     */
-    public boolean existsZh(String str)
-    {
-        return str != null && str.getBytes(CharsetEnum.UTF_8.getCharset()).length > str.length();
     }
 
     /**
