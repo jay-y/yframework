@@ -16,6 +16,7 @@ ext {
             lifecycle        : "2.2.0-alpha03",
             squareupRetrofit2: "2.6.1",
             room             : "2.2.0-alpha02",
+            yframework: "2.2.1"
     ]
 
     dependencies = [
@@ -29,6 +30,7 @@ ext {
             "junit"                             : "junit:junit:4.12",
             "runner"                            : "androidx.test:runner:1.2.0",
             "espresso-core"                     : "androidx.test.espresso:espresso-core:3.2.0",
+            "yframework-ddd"                     : "org.yframework:yframework-ddd:${dependVersions.yframework}",
             // fragment
             "fragment-ktx"                      : "androidx.fragment:fragment-ktx:1.0.0",
             // vm
@@ -37,9 +39,7 @@ ext {
             "lifecycle-compiler"                : "androidx.lifecycle:lifecycle-compiler:${dependVersions.lifecycle}",
             // vm - If using Java8, use the following instead of compiler
             "lifecycle-common-java8"            : "android.arch.lifecycle:common-java8:${dependVersions.lifecycle}",
-            // db
-            "litepal"                           : "org.litepal.android:java:3.0.0",
-            // room
+            // db - room
             "room-runtime"                      : "androidx.room:room-runtime:${dependVersions.room}",
             "room-rxjava2"                      : "androidx.room:room-rxjava2:${dependVersions.room}",
             "room-compiler"                     : "androidx.room:room-compiler:${dependVersions.room}",

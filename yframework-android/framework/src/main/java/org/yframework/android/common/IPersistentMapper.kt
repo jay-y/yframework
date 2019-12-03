@@ -1,9 +1,7 @@
 package org.yframework.android.common
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
+import org.yframework.ddd.common.domain.IDomainObject
 
 
 /**
@@ -14,7 +12,7 @@ import androidx.room.Update
  * EditorDate: 2019-08-21 09:11<br>
  * Editor: ysj
  */
-interface IPersistentMapper<T> : org.yframework.ddd.common.domain.IPersistentMapper<T> {
+interface IPersistentMapper<T : IDomainObject> : org.yframework.ddd.common.domain.IPersistentMapper<T> {
 
     @Delete
     override fun deleteByPrimaryKey(o: Any): Int
