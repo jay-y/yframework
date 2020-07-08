@@ -15,8 +15,4 @@ public interface Persistable<ID extends Serializable> extends Serializable
     ID getId();
 
     void setId(ID id);
-
-    Boolean isNew();
-
-    void setNew(Boolean isNew);
 }
