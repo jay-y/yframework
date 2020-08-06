@@ -1,4 +1,4 @@
-package org.yframework.ddd.common.domain;
+package org.yframework.ddd.domain;
 
 /**
  * Description: 视图对象<br>

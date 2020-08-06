@@ -1,4 +1,4 @@
-package org.yframework.ddd.common.domain.support;
+package org.yframework.ddd.domain.support;
 
 /**
  * Description: 可隐藏的<br>

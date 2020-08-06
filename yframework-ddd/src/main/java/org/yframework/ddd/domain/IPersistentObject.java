@@ -1,7 +1,7 @@
-package org.yframework.ddd.common.domain;
+package org.yframework.ddd.domain;
 
-import org.yframework.ddd.common.domain.support.Auditable;
-import org.yframework.ddd.common.domain.support.Persistable;
+import org.yframework.ddd.domain.support.Auditable;
+import org.yframework.ddd.domain.support.Persistable;
 
 import java.io.Serializable;
 

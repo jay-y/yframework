@@ -1,4 +1,4 @@
-package org.yframework.ddd.common.domain;
+package org.yframework.ddd.domain;
 
 /**
  * Description: 数据传输对象<br>

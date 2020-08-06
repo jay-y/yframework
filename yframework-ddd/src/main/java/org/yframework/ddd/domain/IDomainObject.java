@@ -1,6 +1,6 @@
-package org.yframework.ddd.common.domain;
+package org.yframework.ddd.domain;
 
-import java.io.Serializable;
+import org.yframework.ddd.core.IObject;
 
 /**
  * Description: 领域对象<br>
@@ -10,6 +10,6 @@ import java.io.Serializable;
  * EditorDate: 2018/11/2 下午3:23<br>
  * Editor: ysj
  */
-public interface IDomainObject extends Serializable
+public interface IDomainObject extends IObject
 {
 }

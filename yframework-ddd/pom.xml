@@ -3,17 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>yframework</artifactId>
         <groupId>org.yframework</groupId>
-        <version>2.2.2</version>
+        <artifactId>yframework-dependencies</artifactId>
+        <version>3.0.0</version>
+        <relativePath>../yframework-dependencies</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>org.yframework</groupId>
     <artifactId>yframework-ddd</artifactId>
     <packaging>jar</packaging>
     <version>${parent.version}</version>
 
     <name>yframework-ddd</name>
-    <description>DDD架构</description>
-
+    <description>DDD Architect</description>
 </project>
